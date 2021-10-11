@@ -1,14 +1,34 @@
 variable "alb" {
-  description = "ALB map"
-  default     = {}
+  description = "Map object inputs to generate monitor map for ALB"
+  default = {
+    enabled              = false
+    custom_template_file = ""
+  }
 }
 
 variable "nlb" {
-  description = "NLB map"
-  default     = {}
+  description = "Map object inputs to generate monitor map for NLB"
+  default = {
+    enabled              = false
+    custom_template_file = ""
+  }
 }
 
 variable "apigatewayv2" {
-  description = "Api Gateway v2 map"
-  default     = {}
+  description = "Map object inputs to generate monitor map for Api Gateway V2"
+  default = {
+    enabled              = false
+    custom_template_file = ""
+  }
+}
+
+variable "notification_targets" {
+  type    = string
+  default = ""
+}
+
+variable "exclude_monitors" {
+  type        = list(string)
+  description = "List of monitor key names that will be excluded from creation. Can be used to disable defaults defined."
+  default     = []
 }
