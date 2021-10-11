@@ -1,1 +1,1 @@
-# datadog-monitor-catalog
+# terraform-modules-datadog-catalog
