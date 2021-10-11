@@ -1,0 +1,13 @@
+version: 0.2
+env:
+  variables:
+    REPOSITORY_NAME: "datadog-monitor-catalog"
+phases:
+  install:
+    runtime-versions:
+      python: 3.7
+    commands:
+      - echo install
+  build:
+    commands:
+      - echo build
