@@ -1,0 +1,18 @@
+{
+        "name": "request_count: ${lb_name}",
+        "type": "metric alert",
+        "query": "avg(last_4h):anomalies(sum:aws.applicationelb.request_count{host:${lb_dns_name}} by {host}.as_count(), 'basic', 2, direction='above', alert_window='last_15m', interval=60, count_default_zero='true') >= 1",
+        "message": "Request count monitor triggered for ${lb_name}. Throughput monitoring on number of requests ELB received and sent to registered instances. Notify: ${notification_targets}",
+        "renotify_interval": 15,
+        "notify_no_data": true,
+        "no_data_timeframe": 30,
+        "evaluation_delay": 900,
+        "monitor_thresholds": {
+            "critical": 1,
+            "critical_recovery": 0
+        },
+        "monitor_threshold_windows": {
+            "trigger_window": "last_15m",
+            "recovery_window": "last_15m"
+        }
+}

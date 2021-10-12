@@ -1,26 +1,45 @@
 # Maps of monitors
 locals {
-  catalog_alb = var.alb.enabled == true ? templatefile("${path.module}/templates/alb.json", {
+  #custom_alb = var.alb.enabled == true && lookup(var.alb, "custom_template_file", "") != "" ? (
+  #  templatefile(var.alb.custom_template_file, merge({
+  #    notification_targets = lookup(var.alb, "notification_targets", var.notification_targets)
+  #  }, var.alb))
+  #) : "{}"
+
+  catalog_alb_list = var.alb.enabled == true ? [
+    "httpcode_elb_5xx",
+    "request_count",
+    "target_connection_error",
+    "target_response_time"
+  ] : []
+  catalog_alb = {
+    for item in local.catalog_alb_list: "alb_${item}" => templatefile("${path.module}/monitors/alb/${item}.json", {
     lb_name              = var.alb.lb_name
     lb_dns_name          = var.alb.lb_dns_name
     notification_targets = lookup(var.alb, "notification_targets", var.notification_targets)
   }) : "{}"
 
-  custom_alb = var.alb.enabled == true && var.alb.custom_template_file != "" ? (
-    templatefile(var.alb.custom_template_file, merge({
-      notification_targets = lookup(var.alb, "notification_targets", var.notification_targets)
-    }, var.alb))
-  ) : "{}"
+  #catalog_alb_file = var.alb.enabled == true ? file("${path.module}/templates/alb.json") : "{}"
+  #catalog_alb = {
+  #  for key, val in jsondecode(local.catalog_alb_file) : key => jsondecode(
+  #    replace(
+  #      replace(
+  #        replace(jsonencode(val), "$${lb_name}", var.alb.lb_name),
+  #      "$${lb_dns_name}", var.alb.lb_dns_name),
+  #      "$${notification_targets}", lookup(var.alb, "notification_targets", var.notification_targets)
+  #    )
+  #  )
+  #}
 
   #--------------------------------------------------------------------------------
-
+  /*
   catalog_nlb = var.nlb.enabled == true ? templatefile("${path.module}/templates/nlb.json", {
     lb_name              = var.nlb.lb_name
     lb_dns_name          = var.nlb.lb_dns_name
     notification_targets = lookup(var.nlb, "notification_targets", var.notification_targets)
   }) : "{}"
 
-  custom_nlb = var.nlb.enabled == true && var.nlb.custom_template_file != "" ? (
+  custom_nlb = var.nlb.enabled == true && lookup(var.nlb, "custom_template_file", "") != "" ? (
     templatefile(var.nlb.custom_template_file, merge({
       notification_targets = lookup(var.nlb, "notification_targets", var.notification_targets)
     }, var.nlb))
@@ -33,20 +52,21 @@ locals {
     notification_targets = lookup(var.apigatewayv2, "notification_targets", var.notification_targets)
   }) : "{}"
 
-  custom_apigatewayv2 = var.apigatewayv2.enabled == true && var.apigatewayv2.custom_template_file != "" ? (
+  custom_apigatewayv2 = var.apigatewayv2.enabled == true && lookup(var.apigatewayv2, "custom_template_file", "") != "" ? (
     templatefile(var.apigatewayv2.custom_template_file, merge({
       notification_targets = lookup(var.nlb, "notification_targets", var.notification_targets)
     }, var.apigatewayv2))
   ) : "{}"
-
+*/
   #--------------------------------------------------------------------------------
   monitors_map = merge(
-    jsondecode(local.catalog_alb),
-    jsondecode(local.custom_alb),
-    jsondecode(local.catalog_nlb),
-    jsondecode(local.custom_nlb),
-    jsondecode(local.catalog_apigatewayv2),
-    jsondecode(local.custom_apigatewayv2)
+    local.catalog_alb
+    #jsondecode(local.catalog_alb),
+    #jsondecode(local.custom_alb),
+    #jsondecode(local.catalog_nlb),
+    #jsondecode(local.custom_nlb),
+    #jsondecode(local.catalog_apigatewayv2),
+    #jsondecode(local.custom_apigatewayv2)
   )
   monitors = { for key, val in local.monitors_map : key => val if ! contains(var.exclude_monitors, key) }
 }
