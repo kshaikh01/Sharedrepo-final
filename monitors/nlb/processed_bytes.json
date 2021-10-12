@@ -1,16 +1,16 @@
 {
-    "name"            : "processed_bytes: ${lb_name}",
-    "type"            : "metric alert",
-    "query"           : "avg(last_4h):anomalies(sum:aws.networkelb.processed_bytes{host:${lb_dns_name}} by {host}.as_count(), 'basic', 2, direction='above', alert_window='last_15m', interval=60, count_default_zero='true') >= 1",
-    "message"         : "processed_bytes monitor triggered for ${lb_name}. Monitoring total number of bytes processed by the LB not including health check traffic. Notify: ${notification_targets}",
+    "name": "processed_bytes: ${lb_name}",
+    "type": "metric alert",
+    "query": "avg(last_4h):anomalies(sum:aws.networkelb.processed_bytes{host:${lb_dns_name}} by {host}.as_count(), 'basic', 2, direction='above', alert_window='last_15m', interval=60, count_default_zero='true') >= 1",
+    "message": "processed_bytes monitor triggered for ${lb_name}. Monitoring total number of bytes processed by the LB not including health check traffic. Notify: ${notification_targets}",
     "evaluation_delay": 900,
-    "new_group_delay" : 60,
+    "new_group_delay": 60,
     "monitor_thresholds": {
-      "critical"         : 1,
-      "critical_recovery": 0
+        "critical": 1,
+        "critical_recovery": 0
     },
     "monitor_threshold_windows": {
-      "trigger_window" : "last_15m",
-      "recovery_window": "last_15m"
+        "trigger_window": "last_15m",
+        "recovery_window": "last_15m"
     }
-  }
+}

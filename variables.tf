@@ -1,24 +1,24 @@
 variable "alb" {
   description = "Map object inputs to generate monitor map for ALB"
   default = {
-    enabled              = false
-    custom_template_file = ""
+    enabled         = false
+    custom_monitors = null
   }
 }
 
 variable "nlb" {
   description = "Map object inputs to generate monitor map for NLB"
   default = {
-    enabled              = false
-    custom_template_file = ""
+    enabled         = false
+    custom_monitors = null
   }
 }
 
 variable "apigatewayv2" {
   description = "Map object inputs to generate monitor map for Api Gateway V2"
   default = {
-    enabled              = false
-    custom_template_file = ""
+    enabled         = false
+    custom_monitors = null
   }
 }
 
