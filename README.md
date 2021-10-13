@@ -1,6 +1,15 @@
 # terraform-modules-datadog-catalog
 Generates map objects defining datadog monitors/dashboards so that it can be passed into 'teraform-modules-datadog' to generate resources in datadog.
 
+## Monitors
+Default catalog monitors can be found in `monitors` directory.
+Monitor key names in return object have the format "{service_name}/{resource_type}/{monitor_name}" where:
+- service_name: The key name within `attributes`
+- resource_type: The directory name within `monitors` directory
+- monitor_name: File name within `monitors/{resource_type} without the extension 
+`custom_monitors` map can override default catalog monitor definitions by using key name "{resource_type}/{monitor_name}"
+For each `attributes` in monitor map, optional parameter, notification_targets, can also be passed in to override the value passed to module through notification_targets variable.
+
 # usage #
 ```hcl
 # Generate Monitor Map
@@ -29,6 +38,8 @@ module "datadog_catalog_monitors" {
       }
     }
   }
+
+  notification_targets = "@example_slack_channel @example_pd_alert"
 }
 ```
 
@@ -38,8 +49,15 @@ module "datadog_catalog_monitors" {
 | alb_monitor | alb_monitor object to include DD alb monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
 | apigatewayv2_monitor | apigatewayv2_monitor object to include DD api gateway v2 monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
 | nlb_monitor | nlb_monitor object to include DD nlb monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| notification_targets | String including the notification targets for alerts. | string | `""` | no |
+| notification_targets | String including the notification targets for alerts delimited by space. | string | `""` | no |
 | exclude_monitors | List of monitor key names that will be excluded from creation. Can be used to disable defaults defined. | list | `[]` | no |
+
+#### alb_monitor Properties
+| Name | Description |
+|------|-------------|
+| enabled | Required. Boolean value to enable or disable including into map of monitors. |
+| custom_monitors | Required if enabled. Key/value pairs where value is path to template file that defines a monitor. Set to `null` to disable. |
+| attributes | Required if enabled. Map where each includes `lb_name` and `lb_dns_name`. |
 
 ## Outputs
 | Name | Description |
