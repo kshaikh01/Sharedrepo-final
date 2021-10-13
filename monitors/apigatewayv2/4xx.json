@@ -1,0 +1,13 @@
+{
+    "name": "4xx: ${api_id}",
+    "type": "metric alert",
+    "message": "xx Monitor triggered. Notify: ${notification_targets}",
+    "query": "sum(last_5m):max:aws.apigateway.4xx{apiid:${api_id}} >: 1",
+    "evaluation_delay": 900,
+    "new_group_delay": 60,
+    "require_full_window": false,
+    "monitor_thresholds": {
+        "critical": 1,
+        "critical_recovery": 0
+    }
+}

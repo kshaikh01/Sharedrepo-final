@@ -1,0 +1,12 @@
+{
+    "name": "target_response_time: ${lb_name}",
+    "type": "metric alert",
+    "query": "avg(last_5m):avg:aws.applicationelb.target_response_time.average{host:${lb_dns_name}} by {host} > 1",
+    "message": "target_response_time monitor triggered for ${lb_name}. Performance monitoring on request-processing time between load balancer and backend. Notify: ${notification_targets}",
+    "evaluation_delay": 900,
+    "new_group_delay": 60,
+    "monitor_thresholds": {
+        "critical": 1,
+        "warning": 0.6
+    }
+}
