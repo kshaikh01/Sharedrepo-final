@@ -1,4 +1,4 @@
-variable "alb" {
+variable "alb_monitor" {
   description = "Map object inputs to generate monitor map for ALB"
   default = {
     enabled         = false
@@ -6,7 +6,7 @@ variable "alb" {
   }
 }
 
-variable "nlb" {
+variable "nlb_monitor" {
   description = "Map object inputs to generate monitor map for NLB"
   default = {
     enabled         = false
@@ -14,7 +14,7 @@ variable "nlb" {
   }
 }
 
-variable "apigatewayv2" {
+variable "apigatewayv2_monitor" {
   description = "Map object inputs to generate monitor map for Api Gateway V2"
   default = {
     enabled         = false

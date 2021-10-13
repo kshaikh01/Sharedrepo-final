@@ -3,10 +3,10 @@ locals {
   #--------------------------------------------------------------------------------
   # ALB
   catalog_alb_files         = [for filename in fileset("${path.module}/monitors/alb/", "*.json") : trimsuffix(filename, ".json")]
-  catalog_alb_monitors_list = var.alb.enabled == true ? local.catalog_alb_files : []
+  catalog_alb_monitors_list = var.alb_monitor.enabled == true ? local.catalog_alb_files : []
   catalog_alb_list = flatten([
     for item in local.catalog_alb_monitors_list : [
-      for attr_key, attr_val in var.alb.attributes : {
+      for attr_key, attr_val in var.alb_monitor.attributes : {
         key = "${attr_key}/alb/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/alb/${item}.json", {
           lb_name              = attr_val.lb_name
@@ -18,9 +18,9 @@ locals {
   ])
   catalog_alb = { for item in local.catalog_alb_list : item.key => item.value }
 
-  custom_alb_list = var.alb.enabled == true && var.alb.custom_monitors != null ? flatten([
-    for key, val in var.alb.custom_monitors : [
-      for attr_key, attr_val in var.alb.attributes :
+  custom_alb_list = var.alb_monitor.enabled == true && var.alb_monitor.custom_monitors != null ? flatten([
+    for key, val in var.alb_monitor.custom_monitors : [
+      for attr_key, attr_val in var.alb_monitor.attributes :
       {
         id         = "${attr_key}/${key}"
         template   = val
@@ -37,10 +37,10 @@ locals {
   #--------------------------------------------------------------------------------
   # NLB
   catalog_nlb_files         = [for filename in fileset("${path.module}/monitors/nlb/", "*.json") : trimsuffix(filename, ".json")]
-  catalog_nlb_monitors_list = var.nlb.enabled == true ? local.catalog_nlb_files : []
+  catalog_nlb_monitors_list = var.nlb_monitor.enabled == true ? local.catalog_nlb_files : []
   catalog_nlb_list = flatten([
     for item in local.catalog_nlb_monitors_list : [
-      for attr_key, attr_val in var.nlb.attributes : {
+      for attr_key, attr_val in var.nlb_monitor.attributes : {
         key = "${attr_key}/nlb/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/nlb/${item}.json", {
           lb_name              = attr_val.lb_name
@@ -52,9 +52,9 @@ locals {
   ])
   catalog_nlb = { for item in local.catalog_nlb_list : item.key => item.value }
 
-  custom_nlb_list = var.nlb.enabled == true && var.nlb.custom_monitors != null ? flatten([
-    for key, val in var.nlb.custom_monitors : [
-      for attr_key, attr_val in var.nlb.attributes :
+  custom_nlb_list = var.nlb_monitor.enabled == true && var.nlb_monitor.custom_monitors != null ? flatten([
+    for key, val in var.nlb_monitor.custom_monitors : [
+      for attr_key, attr_val in var.nlb_monitor.attributes :
       {
         id         = "${attr_key}/${key}"
         template   = val
@@ -71,10 +71,10 @@ locals {
   #--------------------------------------------------------------------------------
   # ApigatewayV2
   catalog_apigatewayv2_files         = [for filename in fileset("${path.module}/monitors/apigatewayv2/", "*.json") : trimsuffix(filename, ".json")]
-  catalog_apigatewayv2_monitors_list = var.apigatewayv2.enabled == true ? local.catalog_apigatewayv2_files : []
+  catalog_apigatewayv2_monitors_list = var.apigatewayv2_monitor.enabled == true ? local.catalog_apigatewayv2_files : []
   catalog_apigatewayv2_list = flatten([
     for item in local.catalog_apigatewayv2_monitors_list : [
-      for attr_key, attr_val in var.apigatewayv2.attributes : {
+      for attr_key, attr_val in var.apigatewayv2_monitor.attributes : {
         key = "${attr_key}/apigatewayv2/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/apigatewayv2/${item}.json", {
           api_id               = attr_val.api_id
@@ -85,9 +85,9 @@ locals {
   ])
   catalog_apigatewayv2 = { for item in local.catalog_apigatewayv2_list : item.key => item.value }
 
-  custom_apigatewayv2_list = var.apigatewayv2.enabled == true && var.apigatewayv2.custom_monitors != null ? flatten([
-    for key, val in var.apigatewayv2.custom_monitors : [
-      for attr_key, attr_val in var.apigatewayv2.attributes :
+  custom_apigatewayv2_list = var.apigatewayv2_monitor.enabled == true && var.apigatewayv2_monitor.custom_monitors != null ? flatten([
+    for key, val in var.apigatewayv2_monitor.custom_monitors : [
+      for attr_key, attr_val in var.apigatewayv2_monitor.attributes :
       {
         id         = "${attr_key}/${key}"
         template   = val
