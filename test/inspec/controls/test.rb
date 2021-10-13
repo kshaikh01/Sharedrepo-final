@@ -3,6 +3,7 @@ file_name = "output.json"
 json_file = inspec.profile.file(file_name)
 attributes = JSON.parse(json_file)
 
+id = attributes['id']
 monitors = attributes['monitors']
 empty_monitors = attributes['empty_monitors']
 

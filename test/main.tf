@@ -4,7 +4,7 @@ variable "id" {
 
 locals {
   services = {
-    var.id = ""
+    (var.id) = ""
   }
   notification_targets = "@slack-devops_test_channel"
 }
@@ -79,6 +79,7 @@ output "module_output" {
 
 output "output_json" {
   value = jsonencode({
+    id             = var.id
     monitors       = module.test.monitors
     empty_monitors = module.test_empty.monitors
     }
