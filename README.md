@@ -59,6 +59,20 @@ module "datadog_catalog_monitors" {
 | custom_monitors | Required if enabled. Key/value pairs where value is path to template file that defines a monitor. Set to `null` to disable. |
 | attributes | Required if enabled. Map where each includes `lb_name` and `lb_dns_name`. |
 
+#### apigatewayv2_monitor Properties
+| Name | Description |
+|------|-------------|
+| enabled | Required. Boolean value to enable or disable including into map of monitors. |
+| custom_monitors | Required if enabled. Key/value pairs where value is path to template file that defines a monitor. Set to `null` to disable. |
+| attributes | Required if enabled. Map where each includes `api_id`. |
+
+#### nlb_monitor Properties
+| Name | Description |
+|------|-------------|
+| enabled | Required. Boolean value to enable or disable including into map of monitors. |
+| custom_monitors | Required if enabled. Key/value pairs where value is path to template file that defines a monitor. Set to `null` to disable. |
+| attributes | Required if enabled. Map where each includes `lb_name` and `lb_dns_name`. |
+
 ## Outputs
 | Name | Description |
 |------|-------------|
