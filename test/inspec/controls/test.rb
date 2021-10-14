@@ -7,7 +7,7 @@ id = attributes['id']
 mock_alb = attributes['mock_alb']
 mock_nlb = attributes['mock_nlb']
 mock_apigatewayv2 = attributes['mock_apigatewayv2']
-monitors = OpenStruct.new(attributes['monitors'])
+monitors = attributes['monitors']
 empty_monitors = attributes['empty_monitors']
 
 #--------------------------------------
