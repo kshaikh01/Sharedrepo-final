@@ -12,7 +12,7 @@ empty_monitors = attributes['empty_monitors']
 
 comparisons = {
     monitors["#{id}/alb/httpcode_elb_5xx"]["name"] => "HTTPCode_elb_5XX: #{mock_alb}",
-    monitors["#{id}/alb/request_count"]["name"] => "request_count: #{mock_alb}"
+    monitors["#{id}/alb/request_count"]["name"] => "request_count_override: #{mock_alb}"
 }
 
 #--------------------------------------
