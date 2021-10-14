@@ -19,7 +19,7 @@ control 'datadog_catalog' do
         it { should cmp true }
     end
 
-    describe monitors do
-        its("\"#{id}/alb/httpcode_elb_5xx\".name") { should cmp "HTTPCode_elb_5XX: #{mock_alb}" }
+    describe monitors["#{id}/alb/httpcode_elb_5xx"] do
+        its("name") { should cmp "HTTPCode_elb_5XX: #{mock_alb}" }
     end    
 end  
