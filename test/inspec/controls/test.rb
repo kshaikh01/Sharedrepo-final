@@ -19,7 +19,7 @@ comparisons = {
     monitors["#{id}/nlb/active_flow_count"]["name"] => "active_flow_count: #{mock_nlb}",
     monitors["#{id}/nlb/processed_bytes"]["name"] => "processed_bytes: #{mock_nlb}",
     monitors["#{id}/nlb/tcpelbreset_count"]["name"] => "tcpelbreset_count: #{mock_nlb}",
-    monitors["#{id}/apigatewayv2/4xx"]["name"] => "4xx: #{mock_nlb}",
+    monitors["#{id}/apigatewayv2/4xx"]["name"] => "4xx: #{mock_apigatewayv2}",
     monitors["#{id}/apigatewayv2/5xx"]["name"] => "5xx: #{mock_apigatewayv2}"
 }
 
