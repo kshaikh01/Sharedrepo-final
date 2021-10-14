@@ -8,7 +8,9 @@ Monitor key names in return object have the format "{service_name}/{resource_typ
 - resource_type: The directory name within `monitors` directory
 - monitor_name: File name within `monitors/{resource_type} without the extension 
 `custom_monitors` map can override default catalog monitor definitions by using key name "{resource_type}/{monitor_name}"
-For each `attributes` in monitor map, optional parameter, notification_targets, can also be passed in to override the value passed to module through notification_targets variable.
+For each `attributes` in monitor map:
+- Optional parameter, notification_targets, can also be passed in to override the value passed to module through notification_targets variable.
+- Additional key/value pairs can be passed in so that any custom monitor templates that have additional template variables will apply them.
 
 # usage #
 ```hcl
@@ -39,7 +41,7 @@ module "datadog_catalog_monitors" {
     }
   }
 
-  notification_targets = "@example_slack_channel @example_pd_alert"
+  notification_targets = "@slack-some_test_channel @pagerduty-test_alert"
 }
 ```
 

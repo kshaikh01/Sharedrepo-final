@@ -3,5 +3,5 @@ output "monitors" {
 }
 
 output "dashboards" {
-  value = local.monitors
+  value = local.dashboards
 }
