@@ -3,7 +3,6 @@
 	"type": "metric alert",
 	"query": "avg(last_5m):avg:aws.docdb.cpuutilization{dbclusteridentifier:${dbclusteridentifier}} by {dbclusteridentifier} > 80",
 	"message": "docdb cluster cpututilization monitor triggered for dbclusteridentifier ${dbclusteridentifier}. Notify: ${notification_targets}",
-	"tags": [],
 	"options": {
 		"notify_audit": false,
 		"locked": false,
@@ -13,8 +12,6 @@
 		"notify_no_data": false,
 		"renotify_interval": "0",
 		"evaluation_delay": 900,
-		"escalation_message": "",
-		"include_tags": true,
 		"thresholds": {
 			"critical": 80
 		}
