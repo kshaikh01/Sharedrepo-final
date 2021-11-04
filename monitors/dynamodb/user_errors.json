@@ -1,0 +1,22 @@
+{
+	"name": "dynamodb.user_errors: ${tablename}",
+	"type": "metric alert",
+	"query": "sum(last_5m):sum:aws.dynamodb.user_errors{tablename:${tablename}} by {tablename} > 0",
+	"message": "dynamodb user errors monitor triggered for ${tablename}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"notify_audit": false,
+		"locked": false,
+		"timeout_h": 0,
+		"new_group_delay": 60,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": "0",
+		"evaluation_delay": 900,
+		"escalation_message": "",
+		"include_tags": true,
+		"thresholds": {
+			"critical": 0
+		}
+	}
+}
