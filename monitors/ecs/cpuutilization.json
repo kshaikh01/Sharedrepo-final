@@ -1,0 +1,21 @@
+{
+    "name": "ecs.cpuutilization: ${servicename}",
+    "type": "metric alert",
+    "query": "avg(last_15m):avg:aws.ecs.service.cpuutilization{servicename:${servicename}} by {servicename} > 80",
+    "message": "",
+    "tags": [],
+    "options": {
+        "notify_audit": false,
+        "locked": false,
+        "timeout_h": 0,
+        "new_group_delay": 60,
+        "require_full_window": false,
+        "notify_no_data": false,
+        "renotify_interval": "0",
+        "evaluation_delay": 900,
+        "thresholds": {
+            "critical": 80
+        }
+    },
+    "priority": null
+}
