@@ -1,8 +1,8 @@
 {
-	"name": "dynamodb.system_errors: ${tablename}",
+	"name": "dynamodb.system_errors: ${table_name}",
 	"type": "metric alert",
-	"query": "sum(last_5m):sum:aws.dynamodb.system_errors{tablename:${tablename}} by {tablename} > 0",
-	"message": "dynamodb system errors monitor triggered for ${tablename}. Notify: ${notification_targets}",
+	"query": "sum(last_5m):sum:aws.dynamodb.system_errors{tablename:${table_name}} by {tablename} > 0",
+	"message": "dynamodb system errors monitor triggered for ${table_name}. Notify: ${notification_targets}",
 	"options": {
 		"notify_audit": false,
 		"locked": false,

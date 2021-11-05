@@ -1,7 +1,7 @@
 {
-    "name": "ecs.cpuutilization: ${servicename}",
+    "name": "ecs.cpuutilization: ${service_name}",
     "type": "metric alert",
-    "query": "avg(last_15m):avg:aws.ecs.service.cpuutilization{servicename:${servicename}} by {servicename} > 80",
+    "query": "avg(last_15m):avg:aws.ecs.service.cpuutilization{servicename:${service_name}} by {servicename} > 80",
     "message": "",
     "tags": [],
     "options": {

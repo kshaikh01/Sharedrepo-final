@@ -1,8 +1,8 @@
 {
-	"name": "rds.cpuutilization: ${dbclusteridentifier}",
+	"name": "rds.cpuutilization: ${db_cluster_identifier}",
 	"type": "metric alert",
-	"query": "avg(last_5m):avg:aws.rds.cpuutilization{dbclusteridentifier:${dbclusteridentifier}} by {dbclusteridentifier} > 80",
-	"message": "rds cluster cpututilization monitor triggered for dbclusteridentifier ${dbclusteridentifier}. Notify: ${notification_targets}",
+	"query": "avg(last_5m):avg:aws.rds.cpuutilization{dbclusteridentifier:${db_cluster_identifier}} by {dbclusteridentifier} > 80",
+	"message": "rds cluster cpututilization monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
 	"options": {
 		"notify_audit": false,
 		"locked": false,

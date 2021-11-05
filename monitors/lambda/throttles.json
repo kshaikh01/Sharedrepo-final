@@ -1,8 +1,8 @@
 {
-	"name": "lambda.throttles: ${functionname}",
+	"name": "lambda.throttles: ${function_name}",
 	"type": "metric alert",
-	"query": "sum(last_15m):sum:aws.lambda.throttles{functionname:${functionname}} by {functionname}.as_count() > 100",
-	"message": "lambda throttles monitor triggered for ${functionname}. Notify: ${notification_targets}",
+	"query": "sum(last_15m):sum:aws.lambda.throttles{functionname:${function_name}} by {functionname}.as_count() > 100",
+	"message": "lambda throttles monitor triggered for ${function_name}. Notify: ${notification_targets}",
 	"options": {
 		"notify_audit": false,
 		"locked": false,

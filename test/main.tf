@@ -49,6 +49,66 @@ module "test" {
     }
   }
 
+  apigateway_monitor = {
+    enabled         = true
+    custom_monitors = null
+    attributes = {
+      for key, val in local.services : key => {
+        api_id = random_string.mock_resource_id["${key}_apigateway"].result
+      }
+    }
+  }
+
+  apigatewayv2_monitor = {
+    enabled         = true
+    custom_monitors = null
+    attributes = {
+      for key, val in local.services : key => {
+        api_id = random_string.mock_resource_id["${key}_apigatewayv2"].result
+      }
+    }
+  }
+
+  docdb_monitor = {
+    enabled         = true
+    custom_monitors = null
+    attributes = {
+      for key, val in local.services : key => {
+        db_cluster_identifier = random_string.mock_resource_id["${key}_docdb"].result
+      }
+    }
+  }
+
+  dynamodb_monitor = {
+    enabled         = true
+    custom_monitors = null
+    attributes = {
+      for key, val in local.services : key => {
+        table_name = random_string.mock_resource_id["${key}_dynamodb"].result
+      }
+    }
+  }
+
+  ecs_monitor = {
+    enabled         = true
+    custom_monitors = null
+    attributes = {
+      for key, val in local.services : key => {
+        service_name = random_string.mock_resource_id["${key}_ecs"].result
+      }
+    }
+  }
+
+  lambda_monitor = {
+    enabled         = true
+    custom_monitors = null
+    attributes = {
+      for key, val in local.services : key => {
+        function_name = random_string.mock_resource_id["${key}_lambda"].result
+      }
+    }
+  }
+
   nlb_monitor = {
     enabled         = true
     custom_monitors = null
@@ -60,12 +120,12 @@ module "test" {
     }
   }
 
-  apigatewayv2_monitor = {
+  rds_monitor = {
     enabled         = true
     custom_monitors = null
     attributes = {
       for key, val in local.services : key => {
-        api_id = random_string.mock_resource_id["${key}_apigatewayv2"].result
+        db_cluster_identifier = random_string.mock_resource_id["${key}_rds"].result
       }
     }
   }

@@ -6,8 +6,8 @@ variable "alb_monitor" {
   }
 }
 
-variable "nlb_monitor" {
-  description = "Map object inputs to generate monitor map for NLB"
+variable "apigateway_monitor" {
+  description = "Map object inputs to generate monitor map for Api Gateway"
   default = {
     enabled         = false
     custom_monitors = null
@@ -16,6 +16,54 @@ variable "nlb_monitor" {
 
 variable "apigatewayv2_monitor" {
   description = "Map object inputs to generate monitor map for Api Gateway V2"
+  default = {
+    enabled         = false
+    custom_monitors = null
+  }
+}
+
+variable "docdb_monitor" {
+  description = "Map object inputs to generate monitor map for Document DB"
+  default = {
+    enabled         = false
+    custom_monitors = null
+  }
+}
+
+variable "dynamodb_monitor" {
+  description = "Map object inputs to generate monitor map for Dynamodb"
+  default = {
+    enabled         = false
+    custom_monitors = null
+  }
+}
+
+variable "ecs_monitor" {
+  description = "Map object inputs to generate monitor map for ECS"
+  default = {
+    enabled         = false
+    custom_monitors = null
+  }
+}
+
+variable "lambda_monitor" {
+  description = "Map object inputs to generate monitor map for lambda function"
+  default = {
+    enabled         = false
+    custom_monitors = null
+  }
+}
+
+variable "nlb_monitor" {
+  description = "Map object inputs to generate monitor map for NLB"
+  default = {
+    enabled         = false
+    custom_monitors = null
+  }
+}
+
+variable "rds_monitor" {
+  description = "Map object inputs to generate monitor map for RDS"
   default = {
     enabled         = false
     custom_monitors = null
