@@ -27,7 +27,7 @@ locals {
 }
 
 resource "random_string" "mock_resource_id" {
-  for_each = local.service_resource_list
+  for_each = toset(local.service_resource_list)
   length   = 8
   special  = false
 }
