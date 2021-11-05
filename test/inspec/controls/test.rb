@@ -4,23 +4,28 @@ json_file = inspec.profile.file(file_name)
 attributes = JSON.parse(json_file)
 
 id = attributes['id']
-mock_alb = attributes['mock_alb']
-mock_nlb = attributes['mock_nlb']
-mock_apigatewayv2 = attributes['mock_apigatewayv2']
+mock_resource_ids = attributes['mock_resource_ids']
 monitors = attributes['monitors']
 empty_monitors = attributes['empty_monitors']
 
 comparisons = {
-    monitors["#{id}/alb/httpcode_elb_5xx"]["name"] => "HTTPCode_elb_5XX: #{mock_alb}",
-    monitors["#{id}/alb/request_count"]["name"] => "request_count_override: #{mock_alb}", # Test override
-    monitors["#{id}/alb/target_connection_error_count"]["name"] => "target_connection_error_count: #{mock_alb}",
-    monitors["#{id}/alb/target_response_time"]["name"] => "target_response_time: #{mock_alb}",
-    monitors["#{id}/custom_alb"]["name"] => "custom_target_connection_error_count: #{mock_alb}", # Test additional custom monitor
-    monitors["#{id}/nlb/active_flow_count"]["name"] => "active_flow_count: #{mock_nlb}",
-    monitors["#{id}/nlb/processed_bytes"]["name"] => "processed_bytes: #{mock_nlb}",
-    monitors["#{id}/nlb/tcpelbreset_count"]["name"] => "tcpelbreset_count: #{mock_nlb}",
-    monitors["#{id}/apigatewayv2/4xx"]["name"] => "4xx: #{mock_apigatewayv2}",
-    monitors["#{id}/apigatewayv2/5xx"]["name"] => "5xx: #{mock_apigatewayv2}"
+    monitors["#{id}/alb/httpcode_elb_5xx"]["name"] => "alb.HTTPCode_elb_5XX.override: #{mock_resource_ids["#{id}_alb"]}", # Test override
+    monitors["#{id}/alb/target_connection_error_count"]["name"] => "alb.target_connection_error_count: #{mock_resource_ids["#{id}_alb"]}",
+    monitors["#{id}/custom_alb"]["name"] => "alb.custom_target_connection_error_count: #{mock_resource_ids["#{id}_alb"]}", # Test additional custom monitor
+    monitors["#{id}/nlb/tcpelbreset_count"]["name"] => "nlb.tcpelbreset_count: #{mock_resource_ids["#{id}_nlb"]}",
+    monitors["#{id}/apigateway/4xxerror"]["name"] => "apigateway.4xxerror: #{mock_resource_ids["#{id}_apigateway"]}",
+    monitors["#{id}/apigateway/5xxerror"]["name"] => "apigateway.5xxerror: #{mock_resource_ids["#{id}_apigateway"]}",
+    monitors["#{id}/apigatewayv2/4xx"]["name"] => "apigatewayv2.4xx: #{mock_resource_ids["#{id}_apigatewayv2"]}",
+    monitors["#{id}/apigatewayv2/5xx"]["name"] => "apigatewayv2.5xx: #{mock_resource_ids["#{id}_apigatewayv2"]}",
+    monitors["#{id}/docdb/cpuutilization"]["name"] => "docdb.cpuutilization: #{mock_resource_ids["#{id}_docdb"]}",
+    monitors["#{id}/dynamodb/read_throttle_events"]["name"] => "dynamodb.read_throttle_events: #{mock_resource_ids["#{id}_dynamodb"]}",
+    monitors["#{id}/dynamodb/system_errors"]["name"] => "dynamodb.system_errors: #{mock_resource_ids["#{id}_dynamodb"]}",
+    monitors["#{id}/dynamodb/user_errors"]["name"] => "dynamodb.user_errors: #{mock_resource_ids["#{id}_dynamodb"]}",
+    monitors["#{id}/dynamodb/write_throttle_events"]["name"] => "dynamodb.write_throttle_events: #{mock_resource_ids["#{id}_dynamodb"]}",
+    monitors["#{id}/ecs/service.cpuutilization"]["name"] => "ecs.service.cpuutilization: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/service.memory_utilization"]["name"] => "ecs.service.memory_utilization: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/lambda/throttles"]["name"] => "lambda.throttles: #{mock_resource_ids["#{id}_lambda"]}",
+    monitors["#{id}/rds/cpuutilization"]["name"] => "rds.cpuutilization: #{mock_resource_ids["#{id}_rds"]}"           
 }
 
 #--------------------------------------
