@@ -11,7 +11,7 @@ locals {
     "alb",
     "nlb",
     "apigateway",
-    "apigatewayV2",
+    "apigatewayv2",
     "docdb",
     "dynamodb",
     "ecs",
