@@ -135,8 +135,9 @@ module "test" {
 }
 
 # Test to ensure for_each works on generated monitors map
-resource "null_resource" "test" {
-  for_each = module.test.monitors
+module datadog_monitor {
+  source   = "git@github.com:HappyMoneyInc/terraform-modules-datadog.git?ref=v0.1.3"
+  monitors = module.test.monitors
 }
 
 module "test_empty" {
