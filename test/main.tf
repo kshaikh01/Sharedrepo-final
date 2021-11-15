@@ -2,6 +2,29 @@ variable "id" {
   type = string
 }
 
+terraform {
+  required_providers {
+    datadog = {
+      source = "DataDog/datadog"
+    }
+  }
+}
+
+provider "aws" {
+  region  = "us-east-1"
+  version = "3.57.0"
+}
+
+data "aws_ssm_parameter" "dd_api_key" {
+  name = "/logging/datadog_token"
+}
+
+provider "datadog" {
+  # APP KEY from env variable DD_APP_KEY
+  api_key = data.aws_ssm_parameter.dd_api_key.value
+  version = "3.3.0"
+}
+
 locals {
   services = {
     (var.id) = ""
@@ -135,8 +158,9 @@ module "test" {
 }
 
 # Test to ensure for_each works on generated monitors map
-resource "null_resource" "test" {
-  for_each = module.test.monitors
+module datadog_monitor {
+  source   = "git@github.com:HappyMoneyInc/terraform-modules-datadog.git?ref=v0.1.3"
+  monitors = module.test.monitors
 }
 
 module "test_empty" {
