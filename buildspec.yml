@@ -2,6 +2,8 @@ version: 0.2
 env:
   variables:
     REPOSITORY_NAME: "terraform-modules-datadog-catalog"
+  parameter-store:
+    DD_APP_KEY: "/logging/datadog_app_key"    
 phases:
   install:
     commands:
