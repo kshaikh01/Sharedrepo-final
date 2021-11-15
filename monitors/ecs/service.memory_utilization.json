@@ -8,7 +8,6 @@
         "notify_audit": false,
         "locked": false,
         "timeout_h": 0,
-        "new_group_delay": 60,
         "require_full_window": false,
         "notify_no_data": false,
         "renotify_interval": "0",
