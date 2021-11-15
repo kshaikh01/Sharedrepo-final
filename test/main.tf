@@ -2,6 +2,29 @@ variable "id" {
   type = string
 }
 
+terraform {
+  required_providers {
+    datadog = {
+      source = "DataDog/datadog"
+    }
+  }
+}
+
+provider "aws" {
+  region  = "us-east-1"
+  version = "3.57.0"
+}
+
+data "aws_ssm_parameter" "dd_api_key" {
+  name = "/logging/datadog_token"
+}
+
+provider "datadog" {
+  # APP KEY from env variable DD_APP_KEY
+  api_key = data.aws_ssm_parameter.dd_api_key.value
+  version = "3.3.0"
+}
+
 locals {
   services = {
     (var.id) = ""
