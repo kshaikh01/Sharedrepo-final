@@ -2,7 +2,7 @@
     "name": "ecs.service.memory_utilization: ${service_name}",
     "type": "metric alert",
     "query": "avg(last_15m):avg:aws.ecs.service.memory_utilization{servicename:${service_name}} by {servicename} > 80",
-    "message": "",
+    "message": "ecs service memory_utilization event monitor triggered for ${service_name}. Notify: ${notification_targets}",
     "tags": [],
     "options": {
         "notify_audit": false,

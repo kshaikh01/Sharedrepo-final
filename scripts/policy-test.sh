@@ -13,6 +13,13 @@ mkdir $policy_dir
 unzip -q policies.zip -d $policy_dir/
 extract_dir=$(find $policy_dir -maxdepth 1 -type d -name '*-terraform-policies-*' -print)
 
+# Test monitor definitions
+monitor_files=($(find ../monitors -maxdepth 3 -type f -name '*.json' -print))
+for file_path in ${monitor_files[@]}
+do
+  cfn-guard validate -d $file_path -r policies/monitors.guard
+done
+
 # Generate terraform plan file
 terraform init > /dev/null
 terraform plan -var 'id=test' --out $policy_dir/tfplan > /dev/null
