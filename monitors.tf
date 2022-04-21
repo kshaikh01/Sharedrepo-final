@@ -43,6 +43,7 @@ locals {
       for attr_key, attr_val in var.apigateway_monitor.attributes : {
         key = "${attr_key}/apigateway/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/apigateway/${item}.json", {
+          name                 = lookup(attr_val, "name", attr_val.api_id)
           api_id               = attr_val.api_id
           notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
         }))
@@ -76,6 +77,7 @@ locals {
       for attr_key, attr_val in var.apigatewayv2_monitor.attributes : {
         key = "${attr_key}/apigatewayv2/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/apigatewayv2/${item}.json", {
+          name                 = lookup(attr_val, "name", attr_val.api_id)
           api_id               = attr_val.api_id
           notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
         }))
@@ -327,5 +329,5 @@ locals {
     local.catalog_rds,
     local.custom_rds
   )
-  monitors = { for key, val in local.monitors_map : key => val if ! contains(var.exclude_monitors, key) }
+  monitors = { for key, val in local.monitors_map : key => val if !contains(var.exclude_monitors, key) }
 }

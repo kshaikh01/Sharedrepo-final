@@ -1,5 +1,5 @@
 {
-    "name": "apigatewayv2.4xx: ${api_id}",
+    "name": "apigatewayv2.4xx: ${name}",
     "type": "metric alert",
     "message": "4xx Monitor triggered. Notify: ${notification_targets}",
     "query": "sum(last_5m):max:aws.apigateway.4xx{apiid:${api_id}} >= 1",

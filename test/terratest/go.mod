@@ -1,6 +1,6 @@
 module terraform-modules-datadog-catalog
 
-go 1.14
+go 1.17
 
 require (
 	github.com/gruntwork-io/terratest v0.30.23

@@ -4,6 +4,10 @@ variable "id" {
 
 terraform {
   required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.75.0"
+    }
     datadog = {
       source = "DataDog/datadog"
     }
@@ -11,8 +15,7 @@ terraform {
 }
 
 provider "aws" {
-  region  = "us-east-1"
-  version = "3.57.0"
+  region = "us-east-1"
 }
 
 data "aws_ssm_parameter" "dd_api_key" {
@@ -158,7 +161,7 @@ module "test" {
 }
 
 # Test to ensure for_each works on generated monitors map
-module datadog_monitor {
+module "datadog_monitor" {
   source   = "git@github.com:HappyMoneyInc/terraform-modules-datadog.git?ref=v0.1.3"
   monitors = module.test.monitors
 }

@@ -7,17 +7,21 @@ env:
 phases:
   install:
     commands:
-      - yum install wget tar unzip -y
-      - yum groupinstall -y "Development Tools"
       - source ./scripts/install.sh
+      - ruby -v
+      - inspec version
+      - terragrunt --version
+      - tfenv list
+      - tflint -v
+      - go version
+      - cfn-guard --version
+      - echo $TERRAFORM_VERSION
   build:
     commands:
       - mkdir temp_dir
       - export GOROOT=/usr/local/go
       - export GOPATH=$(pwd)/temp_dir
       - export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-      - branch="main"    
-      - echo $branch
       - echo $cross_account_id
       - | 
          if [ ! -d "/root/.ssh" ] ; then
@@ -32,7 +36,6 @@ phases:
       - export AWS_ACCESS_KEY_ID=$(echo $aws_credentials|jq '.Credentials.AccessKeyId'|tr -d '"')
       - export AWS_SECRET_ACCESS_KEY=$(echo $aws_credentials|jq '.Credentials.SecretAccessKey'|tr -d '"')
       - export AWS_SESSION_TOKEN=$(echo $aws_credentials|jq '.Credentials.SessionToken'|tr -d '"')
-      - source ~/.bashrc      
       - echo $TERRAFORM_VERSION
       - tfenv use $TERRAFORM_VERSION
       - EXIT_STATUS=$?
