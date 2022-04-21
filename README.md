@@ -16,7 +16,7 @@ For each `attributes` in monitor map:
 ```hcl
 # Generate Monitor Map
 module "datadog_catalog_monitors" {
-  source = "git@github.com:HappyMoneyInc/terraform-modules-datadog-catalog.git?ref=v0.1.3"
+  source = "git@github.com:HappyMoneyInc/terraform-modules-datadog-catalog.git?ref=v0.1.4"
   alb_monitor = {
     enabled = true
     custom_monitors = {
@@ -36,6 +36,7 @@ module "datadog_catalog_monitors" {
     custom_monitors = null
     attributes = {
       for key, val in var.services : key => {
+        name   = key
         api_id = module.apigatewayv2[key].api_id
       }
     }
@@ -72,14 +73,14 @@ module "datadog_catalog_monitors" {
 |------|-------------|
 | enabled | Required. Boolean value to enable or disable including into map of monitors. |
 | custom_monitors | Required if enabled. Key/value pairs where value is path to template file that defines a monitor. Set to `null` to disable. |
-| attributes | Required if enabled. Map where each includes `api_id`. |
+| attributes | Required if enabled. Map where each includes `name` and `api_id`. |
 
 #### apigatewayv2_monitor Properties
 | Name | Description |
 |------|-------------|
 | enabled | Required. Boolean value to enable or disable including into map of monitors. |
 | custom_monitors | Required if enabled. Key/value pairs where value is path to template file that defines a monitor. Set to `null` to disable. |
-| attributes | Required if enabled. Map where each includes `api_id`. |
+| attributes | Required if enabled. Map where each includes `name` and `api_id`. |
 
 #### docdb_monitor Properties
 | Name | Description |
