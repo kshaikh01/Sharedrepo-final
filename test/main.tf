@@ -4,6 +4,10 @@ variable "id" {
 
 terraform {
   required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.75.0"
+    }
     datadog = {
       source = "DataDog/datadog"
     }
@@ -12,7 +16,6 @@ terraform {
 
 provider "aws" {
   region  = "us-east-1"
-  version = "3.57.0"
 }
 
 data "aws_ssm_parameter" "dd_api_key" {
