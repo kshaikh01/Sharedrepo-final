@@ -329,5 +329,5 @@ locals {
     local.catalog_rds,
     local.custom_rds
   )
-  monitors = { for key, val in local.monitors_map : key => val if ! contains(var.exclude_monitors, key) }
+  monitors = { for key, val in local.monitors_map : key => val if !contains(var.exclude_monitors, key) }
 }
