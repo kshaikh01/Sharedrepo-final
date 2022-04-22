@@ -38,6 +38,7 @@ locals {
     "nlb",
     "apigateway",
     "apigatewayv2",
+    "cloudfront",
     "docdb",
     "dynamodb",
     "ecs",
@@ -91,6 +92,16 @@ module "test" {
     attributes = {
       for key, val in local.services : key => {
         api_id = random_string.mock_resource_id["${key}_apigatewayv2"].result
+      }
+    }
+  }
+
+  cloudfront_monitor = {
+    enabled         = true
+    custom_monitors = null
+    attributes = {
+      for key, val in local.services : key => {
+        distribution_id = random_string.mock_resource_id["${key}_cloudfront"].result
       }
     }
   }

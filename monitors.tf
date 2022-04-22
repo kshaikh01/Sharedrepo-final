@@ -103,6 +103,40 @@ locals {
   }
 
   #--------------------------------------------------------------------------------
+  # Cloudfront
+  catalog_cloudfront_files         = [for filename in fileset("${path.module}/monitors/cloudfront/", "*.json") : trimsuffix(filename, ".json")]
+  catalog_cloudfront_monitors_list = var.cloudfront_monitor.enabled == true ? local.catalog_cloudfront_files : []
+  catalog_cloudfront_list = flatten([
+    for item in local.catalog_cloudfront_monitors_list : [
+      for attr_key, attr_val in var.cloudfront_monitor.attributes : {
+        key = "${attr_key}/cloudfront/${item}"
+        value = jsondecode(templatefile("${path.module}/monitors/cloudfront/${item}.json", {
+          name                 = lookup(attr_val, "name", attr_val.distribution_id)
+          distribution_id      = attr_val.distribution_id
+          notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
+        }))
+      }
+    ]
+  ])
+  catalog_cloudfront = { for item in local.catalog_cloudfront_list : item.key => item.value }
+
+  custom_cloudfront_list = var.cloudfront_monitor.enabled == true && var.cloudfront_monitor.custom_monitors != null ? flatten([
+    for key, val in var.cloudfront_monitor.custom_monitors : [
+      for attr_key, attr_val in var.cloudfront_monitor.attributes :
+      {
+        id         = "${attr_key}/${key}"
+        template   = val
+        attributes = attr_val
+      }
+    ]
+  ]) : []
+  custom_cloudfront = {
+    for item in local.custom_cloudfront_list : item.id => jsondecode(templatefile(item.template, merge({
+      notification_targets = lookup(item.attributes, "notification_targets", var.notification_targets)
+    }, item.attributes)))
+  }
+
+  #--------------------------------------------------------------------------------
   # docdb
   catalog_docdb_files         = [for filename in fileset("${path.module}/monitors/docdb/", "*.json") : trimsuffix(filename, ".json")]
   catalog_docdb_monitors_list = var.docdb_monitor.enabled == true ? local.catalog_docdb_files : []

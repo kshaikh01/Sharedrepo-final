@@ -16,7 +16,7 @@ For each `attributes` in monitor map:
 ```hcl
 # Generate Monitor Map
 module "datadog_catalog_monitors" {
-  source = "git@github.com:HappyMoneyInc/terraform-modules-datadog-catalog.git?ref=v0.1.4"
+  source = "git@github.com:HappyMoneyInc/terraform-modules-datadog-catalog.git?ref=v0.1.5"
   alb_monitor = {
     enabled = true
     custom_monitors = {
@@ -52,6 +52,7 @@ module "datadog_catalog_monitors" {
 | alb_monitor | alb_monitor object to include DD alb monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
 | apigateway_monitor | apigateway_monitor object to include DD api gateway REST API monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
 | apigatewayv2_monitor | apigatewayv2_monitor object to include DD api gateway v2 monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
+| cloudfront_monitor | cloudfront_monitor object to include DD cloudfront distribution monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
 | docdb_monitor | docdb_monitor object to include DD document DB monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
 | dynamodb_monitor | dynamodb_monitor object to include DD dynamodb monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
 | ecs_monitor | ecs_monitor object to include DD ECS monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
@@ -81,6 +82,13 @@ module "datadog_catalog_monitors" {
 | enabled | Required. Boolean value to enable or disable including into map of monitors. |
 | custom_monitors | Required if enabled. Key/value pairs where value is path to template file that defines a monitor. Set to `null` to disable. |
 | attributes | Required if enabled. Map where each includes `name` and `api_id`. |
+
+#### cloudfront_monitor Properties
+| Name | Description |
+|------|-------------|
+| enabled | Required. Boolean value to enable or disable including into map of monitors. |
+| custom_monitors | Required if enabled. Key/value pairs where value is path to template file that defines a monitor. Set to `null` to disable. |
+| attributes | Required if enabled. Map where each includes `name` and `distribution_id`. |
 
 #### docdb_monitor Properties
 | Name | Description |

@@ -22,6 +22,14 @@ variable "apigatewayv2_monitor" {
   }
 }
 
+variable "cloudfront_monitor" {
+  description = "Map object inputs to generate monitor map for Cloudfront distributions"
+  default = {
+    enabled         = false
+    custom_monitors = null
+  }
+}
+
 variable "docdb_monitor" {
   description = "Map object inputs to generate monitor map for Document DB"
   default = {
