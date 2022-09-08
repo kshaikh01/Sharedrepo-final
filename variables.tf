@@ -78,6 +78,14 @@ variable "rds_monitor" {
   }
 }
 
+variable "spring_monitor" {
+  description = "Map object inputs to generate monitor map for Spring"
+  default = {
+    enabled         = false
+    custom_monitors = null
+  }
+}
+
 variable "notification_targets" {
   type    = string
   default = ""

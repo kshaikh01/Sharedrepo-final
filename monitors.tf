@@ -335,6 +335,45 @@ locals {
   }
 
   #--------------------------------------------------------------------------------
+  # spring
+  catalog_spring_files         = [for filename in fileset("${path.module}/monitors/spring/", "*.json") : trimsuffix(filename, ".json")]
+  catalog_spring_monitors_list = var.spring_monitor.enabled == true ? local.catalog_spring_files : []
+  catalog_spring_list = flatten([
+    for item in local.catalog_spring_monitors_list : [
+      for attr_key, attr_val in var.spring_monitor.attributes : {
+        key = "${attr_key}/spring/${item}"
+        value = jsondecode(templatefile("${path.module}/monitors/spring/${item}.json", {
+          env                    = attr_val.env
+          p50_critical_threshold = lookup(attr_val, "p50_critical_threshold", 0.8)
+          p50_warning_threshold  = lookup(attr_val, "p50_warning_threshold", 0.7)
+          p90_critical_threshold = lookup(attr_val, "p90_critical_threshold", 1)
+          p90_warning_threshold  = lookup(attr_val, "p90_warning_threshold", 0.9)
+          runbook_url            = attr_val.runbook_url
+          service_name           = attr_val.service_name
+          notification_targets   = lookup(attr_val, "notification_targets", var.notification_targets)
+        }))
+      }
+    ]
+  ])
+  catalog_spring = { for item in local.catalog_spring_list : item.key => item.value }
+
+  custom_spring_list = var.spring_monitor.enabled == true && var.spring_monitor.custom_monitors != null ? flatten([
+    for key, val in var.spring_monitor.custom_monitors : [
+      for attr_key, attr_val in var.spring_monitor.attributes :
+      {
+        id         = "${attr_key}/${key}"
+        template   = val
+        attributes = attr_val
+      }
+    ]
+  ]) : []
+  custom_spring = {
+    for item in local.custom_spring_list : item.id => jsondecode(templatefile(item.template, merge({
+      notification_targets = lookup(item.attributes, "notification_targets", var.notification_targets)
+    }, item.attributes)))
+  }
+
+  #--------------------------------------------------------------------------------
   monitors_map = merge(
     local.catalog_alb,
     local.custom_alb,
@@ -361,7 +400,10 @@ locals {
     local.custom_nlb,
 
     local.catalog_rds,
-    local.custom_rds
+    local.custom_rds,
+
+    local.catalog_spring,
+    local.custom_spring
   )
   monitors = { for key, val in local.monitors_map : key => val if !contains(var.exclude_monitors, key) }
 }

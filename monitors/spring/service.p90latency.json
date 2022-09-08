@@ -1,0 +1,22 @@
+{
+  "name": "spring.service.p90latency: ${service_name} ${env}",
+  "type": "query alert",
+  "query": "avg(last_5m):p90:trace.spring.handler{env:${env},service:${service_name}} > ${p90_critical_threshold}",
+  "message": "p90 latency monitor triggered for ${service_name} ${env}. Runbook: ${runbook_url} Notify: ${notification_targets}",
+  "options": {
+    "notify_audit": false,
+    "locked": false,
+    "timeout_h": 0,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "thresholds": {
+      "critical": "${p90_critical_threshold}",
+      "warning": "${p90_warning_threshold}"
+    }
+  },
+  "tags": [
+    "service:${service_name}",
+    "env:${env}"
+  ]
+}

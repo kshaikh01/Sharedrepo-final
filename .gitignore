@@ -44,6 +44,9 @@ override.tf.json
 *.swo
 *.swp
 
+# IntelliJ IDEA config dir
+.idea/
+
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc

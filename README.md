@@ -1,5 +1,5 @@
 # terraform-modules-datadog-catalog
-Generates map objects defining datadog monitors/dashboards so that it can be passed into 'teraform-modules-datadog' to generate resources in datadog.
+Generates map objects defining datadog monitors/dashboards so that it can be passed into 'terraform-modules-datadog' to generate resources in datadog.
 
 ## Monitors
 Default catalog monitors can be found in `monitors` directory.
@@ -47,20 +47,21 @@ module "datadog_catalog_monitors" {
 ```
 
 ## Inputs
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| alb_monitor | alb_monitor object to include DD alb monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| apigateway_monitor | apigateway_monitor object to include DD api gateway REST API monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| apigatewayv2_monitor | apigatewayv2_monitor object to include DD api gateway v2 monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| cloudfront_monitor | cloudfront_monitor object to include DD cloudfront distribution monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| docdb_monitor | docdb_monitor object to include DD document DB monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| dynamodb_monitor | dynamodb_monitor object to include DD dynamodb monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| ecs_monitor | ecs_monitor object to include DD ECS monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| lambda_monitor | lambda_monitor object to include DD lambda monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| nlb_monitor | nlb_monitor object to include DD nlb monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| rds_monitor | rds_monitor object to include DD RDS monitor maps in output. | map | `{ enabled = false, custom_monitors = null }` | no |
-| notification_targets | String including the notification targets for alerts delimited by space. | string | `""` | no |
-| exclude_monitors | List of monitor key names that will be excluded from creation. Can be used to disable defaults defined. | list | `[]` | no |
+| Name                 | Description                                                                                             | Type | Default | Required |
+|----------------------|---------------------------------------------------------------------------------------------------------|:----:|:-----:|:-----:|
+| alb_monitor          | alb_monitor object to include DD alb monitor maps in output.                                            | map | `{ enabled = false, custom_monitors = null }` | no |
+| apigateway_monitor   | apigateway_monitor object to include DD api gateway REST API monitor maps in output.                    | map | `{ enabled = false, custom_monitors = null }` | no |
+| apigatewayv2_monitor | apigatewayv2_monitor object to include DD api gateway v2 monitor maps in output.                        | map | `{ enabled = false, custom_monitors = null }` | no |
+| cloudfront_monitor   | cloudfront_monitor object to include DD cloudfront distribution monitor maps in output.                 | map | `{ enabled = false, custom_monitors = null }` | no |
+| docdb_monitor        | docdb_monitor object to include DD document DB monitor maps in output.                                  | map | `{ enabled = false, custom_monitors = null }` | no |
+| dynamodb_monitor     | dynamodb_monitor object to include DD dynamodb monitor maps in output.                                  | map | `{ enabled = false, custom_monitors = null }` | no |
+| ecs_monitor          | ecs_monitor object to include DD ECS monitor maps in output.                                            | map | `{ enabled = false, custom_monitors = null }` | no |
+| lambda_monitor       | lambda_monitor object to include DD lambda monitor maps in output.                                      | map | `{ enabled = false, custom_monitors = null }` | no |
+| nlb_monitor          | nlb_monitor object to include DD nlb monitor maps in output.                                            | map | `{ enabled = false, custom_monitors = null }` | no |
+| rds_monitor          | rds_monitor object to include DD RDS monitor maps in output.                                            | map | `{ enabled = false, custom_monitors = null }` | no |
+| spring_monitor       | spring_monitor object to include DD Spring monitor maps in output.                                      | map | `{ enabled = false, custom_monitors = null }` | no |
+| notification_targets | String including the notification targets for alerts delimited by space.                                | string | `""` | no |
+| exclude_monitors     | List of monitor key names that will be excluded from creation. Can be used to disable defaults defined. | list | `[]` | no |
 
 #### alb_monitor Properties
 | Name | Description |
@@ -131,6 +132,13 @@ module "datadog_catalog_monitors" {
 | enabled | Required. Boolean value to enable or disable including into map of monitors. |
 | custom_monitors | Required if enabled. Key/value pairs where value is path to template file that defines a monitor. Set to `null` to disable. |
 | attributes | Required if enabled. Map where each includes `db_cluster_identifier`. |
+
+#### spring_monitor Properties
+| Name | Description                                                                                                                 |
+|------|-----------------------------------------------------------------------------------------------------------------------------|
+| enabled | Required. Boolean value to enable or disable including into map of monitors.                                                |
+| custom_monitors | Required if enabled. Key/value pairs where value is path to template file that defines a monitor. Set to `null` to disable. |
+| attributes | Required if enabled. Map where each includes `service_name`, `env`, `runbook`.                                               |
 
 ## Outputs
 | Name | Description |

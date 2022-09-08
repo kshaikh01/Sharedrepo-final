@@ -25,7 +25,6 @@ data "aws_ssm_parameter" "dd_api_key" {
 provider "datadog" {
   # APP KEY from env variable DD_APP_KEY
   api_key = data.aws_ssm_parameter.dd_api_key.value
-  version = "3.3.0"
 }
 
 locals {
@@ -44,7 +43,8 @@ locals {
     "ecs",
     "lambda",
     "nlb",
-    "rds"
+    "rds",
+    "spring"
   ]
   service_resource_list = flatten([
     for key, val in local.services : [
@@ -167,6 +167,20 @@ module "test" {
     }
   }
 
+  spring_monitor = {
+    enabled         = true
+    custom_monitors = null
+    attributes = {
+      for key, val in local.services : key => {
+        env                    = "test"
+        p50_critical_threshold = 1
+        p90_critical_threshold = 1.2
+        runbook_url            = "https://foo.bar/page"
+        service_name           = random_string.mock_resource_id["${key}_spring"].result
+      }
+    }
+  }
+
   notification_targets = local.notification_targets
   exclude_monitors     = []
 }
@@ -193,5 +207,6 @@ output "output_json" {
     mock_resource_ids = {
       for key, val in random_string.mock_resource_id : key => val.result
     }
+    env = "test"
   })
 }
