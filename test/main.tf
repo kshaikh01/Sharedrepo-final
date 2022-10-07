@@ -44,7 +44,8 @@ locals {
     "lambda",
     "nlb",
     "rds",
-    "spring"
+    "spring",
+    "service"
   ]
   service_resource_list = flatten([
     for key, val in local.services : [
@@ -132,6 +133,7 @@ module "test" {
     attributes = {
       for key, val in local.services : key => {
         service_name = random_string.mock_resource_id["${key}_ecs"].result
+        runbook_url  = "https://foo.bar/page"
       }
     }
   }
@@ -172,11 +174,31 @@ module "test" {
     custom_monitors = null
     attributes = {
       for key, val in local.services : key => {
-        env                    = "test"
-        p50_critical_threshold = 1
-        p90_critical_threshold = 1.2
-        runbook_url            = "https://foo.bar/page"
-        service_name           = random_string.mock_resource_id["${key}_spring"].result
+        env                                    = "test"
+        p50_critical_threshold                 = 1
+        p90_critical_threshold                 = 1.2
+        error_rate_warning_threshold           = 0.01
+        error_rate_critical_threshold          = 0.05
+        throughput_critical_recovery_threshold = 0
+        throughput_critical_threshold          = 1
+        runbook_url                            = "https://foo.bar/page"
+        service_name                           = random_string.mock_resource_id["${key}_spring"].result
+      }
+    }
+  }
+
+  service_monitor = {
+    enabled         = true
+    custom_monitors = null
+    attributes = {
+      for key, val in local.services : key => {
+        env                                  = "test"
+        latest_deployment_critical_threshold = 0
+        log_warning_threshold                = 1
+        log_critical_threshold               = 5
+        faulty_deployment_critical_threshold = 0
+        runbook_url                          = "https://foo.bar/page"
+        service_name                         = random_string.mock_resource_id["${key}_service"].result
       }
     }
   }

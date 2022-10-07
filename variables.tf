@@ -86,6 +86,15 @@ variable "spring_monitor" {
   }
 }
 
+variable "service_monitor" {
+  description = "Map object inputs to generate monitor map for service"
+  default = {
+    enabled         = false
+    custom_monitors = null
+  }
+}
+
+
 variable "notification_targets" {
   type    = string
   default = ""

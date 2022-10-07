@@ -1,0 +1,30 @@
+{
+  "name": "service.errors_in_logs: ${service_name}",
+  "type": "log alert",
+  "query": "logs(\"service:${service_name} status:error env:${env}\").index(\"main\").rollup(\"count\").last(\"15m\") > ${log_critical_threshold}",
+  "message": " Error in logs for ${service_name}. Runbook: ${runbook_url} Notify: ${notification_targets}",
+  
+  "options": {
+    "notify_audit": false,
+    "renotify_statuses": [
+      "alert"
+    ],
+    "renotify_interval": 60,
+    "include_tags": true,
+    "thresholds": {
+      "critical": "${log_critical_threshold}",
+      "warning": "${log_warning_threshold}"
+    },
+    "silenced": {},
+    "new_host_delay": 300,
+    "on_missing_data": "show_and_notify_no_data",
+    "enable_logs_sample": true,
+    "groupby_simple_monitor": false,
+    "escalation_message": "",
+    "restriction_query": null
+  },
+  "tags": [
+    "env:${env}",
+    "service:${service_name}"
+  ]
+}

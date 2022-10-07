@@ -1,0 +1,23 @@
+{
+  "name": "spring.high_error_rate: ${service_name}",
+  "type": "query alert",
+  "query": "sum(last_10m):( sum:trace.spring.handler.errors{env:${env},service:${service_name}}.as_count() / sum:trace.spring.handler.hits{env:${env},service:${service_name}}.as_count() ) > ${error_rate_critical_threshold}",
+  "message": "`${service_name}` error rate is too high.Runbook: ${runbook_url} Notify: ${notification_targets}",
+  "options": {
+    "notify_audit": false,
+    "silenced": {},
+    "include_tags": true,
+    "thresholds": {
+      "critical": "${error_rate_critical_threshold}",
+      "warning": "${error_rate_warning_threshold}"
+    },
+    "require_full_window": false,
+    "new_host_delay": 300,
+    "notify_no_data": false,
+    "renotify_interval": 0
+  },
+  "tags": [
+    "service:${service_name}",
+    "env:${env}"
+  ]
+}

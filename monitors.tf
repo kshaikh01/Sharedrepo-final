@@ -212,6 +212,7 @@ locals {
         key = "${attr_key}/ecs/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/ecs/${item}.json", {
           service_name         = attr_val.service_name
+          runbook_url          = attr_val.runbook_url
           notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
         }))
       }
@@ -343,14 +344,18 @@ locals {
       for attr_key, attr_val in var.spring_monitor.attributes : {
         key = "${attr_key}/spring/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/spring/${item}.json", {
-          env                    = attr_val.env
-          p50_critical_threshold = lookup(attr_val, "p50_critical_threshold", 0.8)
-          p50_warning_threshold  = lookup(attr_val, "p50_warning_threshold", 0.7)
-          p90_critical_threshold = lookup(attr_val, "p90_critical_threshold", 1)
-          p90_warning_threshold  = lookup(attr_val, "p90_warning_threshold", 0.9)
-          runbook_url            = attr_val.runbook_url
-          service_name           = attr_val.service_name
-          notification_targets   = lookup(attr_val, "notification_targets", var.notification_targets)
+          env                                    = attr_val.env
+          p50_critical_threshold                 = lookup(attr_val, "p50_critical_threshold", 0.8)
+          p50_warning_threshold                  = lookup(attr_val, "p50_warning_threshold", 0.7)
+          p90_critical_threshold                 = lookup(attr_val, "p90_critical_threshold", 1)
+          p90_warning_threshold                  = lookup(attr_val, "p90_warning_threshold", 0.9)
+          error_rate_warning_threshold           = lookup(attr_val, "error_rate_warning_threshold", 0.01)
+          error_rate_critical_threshold          = lookup(attr_val, "error_rate_critical_threshold", 0.05)
+          throughput_critical_recovery_threshold = lookup(attr_val, "throughput_critical_recovery_threshold", 0)
+          throughput_critical_threshold          = lookup(attr_val, "throughput_critical_threshold", 1)
+          runbook_url                            = attr_val.runbook_url
+          service_name                           = attr_val.service_name
+          notification_targets                   = lookup(attr_val, "notification_targets", var.notification_targets)
         }))
       }
     ]
@@ -369,6 +374,45 @@ locals {
   ]) : []
   custom_spring = {
     for item in local.custom_spring_list : item.id => jsondecode(templatefile(item.template, merge({
+      notification_targets = lookup(item.attributes, "notification_targets", var.notification_targets)
+    }, item.attributes)))
+  }
+
+  #--------------------------------------------------------------------------------
+  # service
+  catalog_service_files         = [for filename in fileset("${path.module}/monitors/service/", "*.json") : trimsuffix(filename, ".json")]
+  catalog_service_monitors_list = var.service_monitor.enabled == true ? local.catalog_service_files : []
+  catalog_service_list = flatten([
+    for item in local.catalog_service_monitors_list : [
+      for attr_key, attr_val in var.service_monitor.attributes : {
+        key = "${attr_key}/service/${item}"
+        value = jsondecode(templatefile("${path.module}/monitors/service/${item}.json", {
+          env                                  = attr_val.env
+          latest_deployment_critical_threshold = lookup(attr_val, "latest_deployment_critical_threshold", 0)
+          log_warning_threshold                = lookup(attr_val, "log_warning_threshold", 1)
+          log_critical_threshold               = lookup(attr_val, "log_critical_threshold", 5)
+          faulty_deployment_critical_threshold = lookup(attr_val, "faulty_deployment_critical_threshold", 0)
+          runbook_url                          = attr_val.runbook_url
+          service_name                         = attr_val.service_name
+          notification_targets                 = lookup(attr_val, "notification_targets", var.notification_targets)
+        }))
+      }
+    ]
+  ])
+  catalog_service = { for item in local.catalog_service_list : item.key => item.value }
+
+  custom_service_list = var.service_monitor.enabled == true && var.service_monitor.custom_monitors != null ? flatten([
+    for key, val in var.service_monitor.custom_monitors : [
+      for attr_key, attr_val in var.service_monitor.attributes :
+      {
+        id         = "${attr_key}/${key}"
+        template   = val
+        attributes = attr_val
+      }
+    ]
+  ]) : []
+  custom_service = {
+    for item in local.custom_service_list : item.id => jsondecode(templatefile(item.template, merge({
       notification_targets = lookup(item.attributes, "notification_targets", var.notification_targets)
     }, item.attributes)))
   }
@@ -403,7 +447,10 @@ locals {
     local.custom_rds,
 
     local.catalog_spring,
-    local.custom_spring
+    local.custom_spring,
+
+    local.catalog_service,
+    local.custom_service
   )
   monitors = { for key, val in local.monitors_map : key => val if !contains(var.exclude_monitors, key) }
 }

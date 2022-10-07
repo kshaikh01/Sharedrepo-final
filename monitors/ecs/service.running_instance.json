@@ -1,0 +1,26 @@
+{
+	"name": "ecs.service.running_instance: ${service_name}",
+	"type": "query alert",
+	"query": "sum(last_5m):sum:aws.ecs.service.running{service:${service_name}} <= 0",
+	"message": "ecs service running instance monitor triggered for ${service_name} Runbook: ${runbook_url} Notify: ${notification_targets}",
+	"tags": [
+		"service:${service_name}"
+	],
+	"options": {
+		"notify_audit": true,
+		"renotify_statuses": null,
+		"timeout_h": 0,
+		"silenced": {},
+		"include_tags": false,
+		"thresholds": {
+			"critical": 0
+		},
+		"require_full_window": false,
+		"new_host_delay": 300,
+		"notify_no_data": true,
+		"renotify_interval": 0,
+		"escalation_message": "",
+		"renotify_occurrences": null,
+		"no_data_timeframe": 15
+	}	
+}

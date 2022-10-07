@@ -1,0 +1,24 @@
+{
+  "name": "service.errors_in_latest_deployment: ${service_name}",
+  "type": "event-v2 alert",
+  "query": "events(\"tags:(deployment_analysis \"env:${env}\" \"service:${service_name}\")\").rollup(\"count\").last(\"15m\") > ${latest_deployment_critical_threshold}",
+  "message": "There were new errors detected in the latest deployment.${service_name} Runbook: ${runbook_url} Notify: ${notification_targets}",
+  "options": {
+    "notify_audit": false,
+    "silenced": {},
+    "enable_logs_sample": false,
+    "thresholds": {
+      "critical": "${latest_deployment_critical_threshold}"
+    },
+    "new_host_delay": 300,
+    "on_missing_data": "show_and_notify_no_data",
+    "include_tags": true,
+    "groupby_simple_monitor": false,
+    "restriction_query": null
+  },
+  "tags": [
+    "service:${service_name}",
+    "env:${env}"
+  ]
+  
+}
