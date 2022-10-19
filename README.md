@@ -16,7 +16,7 @@ For each `attributes` in monitor map:
 ```hcl
 # Generate Monitor Map
 module "datadog_catalog_monitors" {
-  source = "git@github.com:HappyMoneyInc/terraform-modules-datadog-catalog.git?ref=v0.3.0"
+  source = "git@github.com:HappyMoneyInc/terraform-modules-datadog-catalog.git?ref=v0.3.1"
   alb_monitor = {
     enabled = true
     custom_monitors = {
