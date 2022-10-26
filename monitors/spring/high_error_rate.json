@@ -1,8 +1,8 @@
 {
-  "name": "spring.high_error_rate: ${service_name}",
+  "name": "spring.high_error_rate: ${service_name} ${env}",
   "type": "query alert",
   "query": "sum(last_10m):( sum:trace.spring.handler.errors{env:${env},service:${service_name}}.as_count() / sum:trace.spring.handler.hits{env:${env},service:${service_name}}.as_count() ) > ${error_rate_critical_threshold}",
-  "message": "`${service_name}` error rate is too high.Runbook: ${runbook_url} Notify: ${notification_targets}",
+  "message": "`${service_name}` error rate is too high in env:${env} .Runbook: ${runbook_url} Notify: ${notification_targets}",
   "options": {
     "notify_audit": false,
     "silenced": {},

@@ -28,11 +28,11 @@ comparisons = {
     monitors["#{id}/ecs/service.running_instance"]["name"] => "ecs.service.running_instance: #{mock_resource_ids["#{id}_ecs"]}",
     monitors["#{id}/lambda/throttles"]["name"] => "lambda.throttles: #{mock_resource_ids["#{id}_lambda"]}",
     monitors["#{id}/rds/cpuutilization"]["name"] => "rds.cpuutilization: #{mock_resource_ids["#{id}_rds"]}",
-    monitors["#{id}/service/errors_in_latest_deployment"]["name"] => "service.errors_in_latest_deployment: #{mock_resource_ids["#{id}_service"]}",
-    monitors["#{id}/service/errors_in_logs"]["name"] => "service.errors_in_logs: #{mock_resource_ids["#{id}_service"]}",
-    monitors["#{id}/service/faulty_deployment"]["name"] => "service.faulty_deployment: #{mock_resource_ids["#{id}_service"]}",
-    monitors["#{id}/spring/abnormal_change_in_throughput"]["name"] => "spring.abnormal_change_in_throughput: #{mock_resource_ids["#{id}_spring"]}",
-    monitors["#{id}/spring/high_error_rate"]["name"] => "spring.high_error_rate: #{mock_resource_ids["#{id}_spring"]}",
+    monitors["#{id}/service/errors_in_latest_deployment"]["name"] => "service.errors_in_latest_deployment: #{mock_resource_ids["#{id}_service"]} #{env}",
+    monitors["#{id}/service/errors_in_logs"]["name"] => "service.errors_in_logs: #{mock_resource_ids["#{id}_service"]} #{env}",
+    monitors["#{id}/service/faulty_deployment"]["name"] => "service.faulty_deployment: #{mock_resource_ids["#{id}_service"]} #{env}",
+    monitors["#{id}/spring/abnormal_change_in_throughput"]["name"] => "spring.abnormal_change_in_throughput: #{mock_resource_ids["#{id}_spring"]} #{env}",
+    monitors["#{id}/spring/high_error_rate"]["name"] => "spring.high_error_rate: #{mock_resource_ids["#{id}_spring"]} #{env}",
     monitors["#{id}/spring/service.p50latency"]["name"] => "spring.service.p50latency: #{mock_resource_ids["#{id}_spring"]} #{env}",
     monitors["#{id}/spring/service.p90latency"]["name"] => "spring.service.p90latency: #{mock_resource_ids["#{id}_spring"]} #{env}"
 }

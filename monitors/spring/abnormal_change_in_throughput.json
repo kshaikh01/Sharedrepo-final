@@ -1,8 +1,8 @@
 {
-  "name": "spring.abnormal_change_in_throughput: ${service_name}",
+  "name": "spring.abnormal_change_in_throughput: ${service_name} ${env}",
   "type": "query alert",
   "query": "avg(last_1h):anomalies(sum:trace.spring.handler.hits{env:${env},service:${service_name}}, 'agile', 5, direction='both', interval=20, alert_window='last_5m', seasonality='monthly', timezone='utc', count_default_zero='true') >= ${throughput_critical_threshold}",
-  "message": "`${service_name}` throughput deviated too much from its usual value. Runbook: ${runbook_url} Notify: ${notification_targets}",
+  "message": "`${service_name}` throughput deviated too much from its usual value in env:${env}. Runbook: ${runbook_url} Notify: ${notification_targets}",
   "options": {
     "notify_audit": false,
     "silenced": {},

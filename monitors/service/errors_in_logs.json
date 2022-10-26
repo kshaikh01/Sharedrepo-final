@@ -1,8 +1,8 @@
 {
-  "name": "service.errors_in_logs: ${service_name}",
+  "name": "service.errors_in_logs: ${service_name} ${env}",
   "type": "log alert",
   "query": "logs(\"service:${service_name} status:error env:${env}\").index(\"main\").rollup(\"count\").last(\"15m\") > ${log_critical_threshold}",
-  "message": " Error in logs for ${service_name}. Runbook: ${runbook_url} Notify: ${notification_targets}",
+  "message": " Error in logs for ${service_name} in env:${env}. Runbook: ${runbook_url} Notify: ${notification_targets}",
   
   "options": {
     "notify_audit": false,
