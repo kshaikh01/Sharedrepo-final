@@ -212,7 +212,7 @@ locals {
         key = "${attr_key}/ecs/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/ecs/${item}.json", {
           service_name         = attr_val.service_name
-          runbook_url          = attr_val.runbook_url
+          runbook_url          = lookup(attr_val, "runbook_url", "")
           notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
         }))
       }
@@ -353,7 +353,7 @@ locals {
           error_rate_critical_threshold          = lookup(attr_val, "error_rate_critical_threshold", 0.05)
           throughput_critical_recovery_threshold = lookup(attr_val, "throughput_critical_recovery_threshold", 0)
           throughput_critical_threshold          = lookup(attr_val, "throughput_critical_threshold", 1)
-          runbook_url                            = attr_val.runbook_url
+          runbook_url                            = lookup(attr_val, "runbook_url", "")
           service_name                           = attr_val.service_name
           notification_targets                   = lookup(attr_val, "notification_targets", var.notification_targets)
         }))
@@ -392,7 +392,7 @@ locals {
           log_warning_threshold                = lookup(attr_val, "log_warning_threshold", 1)
           log_critical_threshold               = lookup(attr_val, "log_critical_threshold", 5)
           faulty_deployment_critical_threshold = lookup(attr_val, "faulty_deployment_critical_threshold", 0)
-          runbook_url                          = attr_val.runbook_url
+          runbook_url                          = lookup(attr_val, "runbook_url", "")
           service_name                         = attr_val.service_name
           notification_targets                 = lookup(attr_val, "notification_targets", var.notification_targets)
         }))
