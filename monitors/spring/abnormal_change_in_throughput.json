@@ -22,6 +22,8 @@
   },
   "tags": [
     "service:${service_name}",
-    "env:${env}"
+    "env:${env}",
+    "type:automated"
+
   ]
 }

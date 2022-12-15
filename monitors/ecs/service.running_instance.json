@@ -4,7 +4,9 @@
 	"query": "sum(last_5m):sum:aws.ecs.service.running{service:${service_name}} <= 0",
 	"message": "ecs service running instance monitor triggered for ${service_name} Runbook: ${runbook_url} Notify: ${notification_targets}",
 	"tags": [
-		"service:${service_name}"
+		"service:${service_name}",
+		"type:automated"
+
 	],
 	"options": {
 		"notify_audit": true,
