@@ -1,7 +1,7 @@
 {
   "name": "spring.abnormal_change_in_throughput: ${service_name} ${env}",
   "type": "query alert",
-  "query": "avg(last_1h):anomalies(sum:trace.spring.handler.hits{env:${env},service:${service_name}}, 'agile', 5, direction='both', interval=20, alert_window='last_5m', seasonality='monthly', timezone='utc', count_default_zero='true') >= ${throughput_critical_threshold}",
+  "query": "avg(${throughput_timeframe}):anomalies(sum:trace.spring.handler.hits{env:${env},service:${service_name}}, 'agile', ${throughput_deviations}, direction='both', interval=20, alert_window='${throughput_alert_window}', seasonality='${throughput_seasonality}', timezone='utc', count_default_zero='true') ${throughput_operator} ${throughput_critical_threshold}",
   "message": "`${service_name}` throughput deviated too much from its usual value in env:${env}. Runbook: ${runbook_url} Notify: ${notification_targets}",
   "options": {
     "notify_audit": false,
@@ -16,8 +16,8 @@
     "notify_no_data": false,
     "renotify_interval": 0,
     "threshold_windows": {
-      "recovery_window": "last_5m",
-      "trigger_window": "last_5m"
+      "recovery_window": "${throughput_recovery_window}",
+      "trigger_window": "${throughput_trigger_window}"
     }
   },
   "tags": [

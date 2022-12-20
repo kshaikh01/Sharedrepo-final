@@ -1,7 +1,7 @@
 {
   "name": "service.faulty_deployment: ${service_name} ${env}",
   "type": "event-v2 alert",
-  "query": "events(\"tags:(deployment_analysis \"env:${env}\" \"service:${service_name}\") \").by(\" version\").rollup(\"count\").last(\"70m\") > ${faulty_deployment_critical_threshold}",
+  "query": "events(\"tags:(deployment_analysis \"env:${env}\" \"service:${service_name}\") \").by(\" version\").rollup(\"count\").last(\"${faulty_deployment_timeframe}\") ${faulty_deployment_operator} ${faulty_deployment_critical_threshold}",
   "message": "Anomalous errors were detected in the latest deployment ${service_name} in env:${env}. Runbook: ${runbook_url} Notify: ${notification_targets}",
   "options": {
     "notify_audit": false,

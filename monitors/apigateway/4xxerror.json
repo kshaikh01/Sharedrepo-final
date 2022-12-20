@@ -2,11 +2,11 @@
     "name": "apigateway.4xxerror: ${name}",
     "type": "metric alert",
     "message": "4xxerror Monitor triggered. Notify: ${notification_targets}",
-    "query": "sum(last_5m):max:aws.apigateway.4xxerror{apiid:${api_id}} >= 1",
+    "query": "sum(${apigateway_4xxerror_timeframe}):max:aws.apigateway.4xxerror{apiid:${api_id}} ${apigateway_4xxerror_operator} ${apigateway_4xxerror_critical}",
     "evaluation_delay": 900,
     "require_full_window": false,
     "monitor_thresholds": {
-        "critical": 1,
-        "critical_recovery": 0
+        "critical": "${apigateway_4xxerror_critical}",
+        "critical_recovery": "${apigateway_4xxerror_critical_recovery}"
     }
 }

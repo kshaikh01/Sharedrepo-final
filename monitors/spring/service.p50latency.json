@@ -1,7 +1,7 @@
 {
   "name": "spring.service.p50latency: ${service_name} ${env}",
   "type": "query alert",
-  "query": "avg(last_5m):p50:trace.spring.handler{env:${env},service:${service_name}} > ${p50_critical_threshold}",
+  "query": "avg(${p50_latency_timeframe}):p50:trace.spring.handler{env:${env},service:${service_name}} ${p50_latency_operator} ${p50_critical_threshold}",
   "message": "p50 latency monitor triggered for ${service_name} ${env}. Runbook: ${runbook_url} Notify: ${notification_targets}",
   "options": {
     "notify_audit": false,

@@ -9,9 +9,15 @@ locals {
       for attr_key, attr_val in var.alb_monitor.attributes : {
         key = "${attr_key}/alb/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/alb/${item}.json", {
-          lb_name              = attr_val.lb_name
-          lb_dns_name          = attr_val.lb_dns_name
-          notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
+          lb_name                        = attr_val.lb_name
+          lb_dns_name                    = attr_val.lb_dns_name
+          notification_targets           = lookup(attr_val, "notification_targets", var.notification_targets)
+          alb_httpcode_elb_5xx_timeframe = lookup(attr_val, "alb_httpcode_elb_5xx_timeframe", "last_5m")
+          alb_httpcode_elb_5xx_operator  = lookup(attr_val, "alb_httpcode_elb_5xx_operator", ">")
+          alb_httpcode_elb_5xx_critical  = lookup(attr_val, "alb_httpcode_elb_5xx_critical", 0)
+          alb_connection_error_timeframe = lookup(attr_val, "alb_connection_error_timeframe", "last_5m")
+          alb_connection_error_operator  = lookup(attr_val, "alb_connection_error_operator", ">")
+          alb_connection_error_critical  = lookup(attr_val, "alb_connection_error_critical", 0)
         }))
       }
     ]
@@ -43,9 +49,17 @@ locals {
       for attr_key, attr_val in var.apigateway_monitor.attributes : {
         key = "${attr_key}/apigateway/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/apigateway/${item}.json", {
-          name                 = lookup(attr_val, "name", attr_val.api_id)
-          api_id               = attr_val.api_id
-          notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
+          name                                  = lookup(attr_val, "name", attr_val.api_id)
+          api_id                                = attr_val.api_id
+          notification_targets                  = lookup(attr_val, "notification_targets", var.notification_targets)
+          apigateway_4xxerror_timeframe         = lookup(attr_val, "apigateway_4xxerror_timeframe", "last_5m")
+          apigateway_4xxerror_operator          = lookup(attr_val, "apigateway_4xxerror_operator", ">=")
+          apigateway_4xxerror_critical          = lookup(attr_val, "apigateway_4xxerror_critical", 1)
+          apigateway_4xxerror_critical_recovery = lookup(attr_val, "apigateway_4xxerror_critical", 0)
+          apigateway_5xxerror_timeframe         = lookup(attr_val, "apigateway_5xxerror_timeframe", "last_5m")
+          apigateway_5xxerror_operator          = lookup(attr_val, "apigateway_5xxerror_operator", ">=")
+          apigateway_5xxerror_critical          = lookup(attr_val, "apigateway_5xxerror_critical", 1)
+          apigateway_5xxerror_critical_recovery = lookup(attr_val, "apigateway_5xxerror_critical", 0)
         }))
       }
     ]
@@ -77,9 +91,17 @@ locals {
       for attr_key, attr_val in var.apigatewayv2_monitor.attributes : {
         key = "${attr_key}/apigatewayv2/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/apigatewayv2/${item}.json", {
-          name                 = lookup(attr_val, "name", attr_val.api_id)
-          api_id               = attr_val.api_id
-          notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
+          name                               = lookup(attr_val, "name", attr_val.api_id)
+          api_id                             = attr_val.api_id
+          notification_targets               = lookup(attr_val, "notification_targets", var.notification_targets)
+          apigatewayv2_4xx_timeframe         = lookup(attr_val, "apigatewayv2_4xx_timeframe", "last_5m")
+          apigatewayv2_4xx_operator          = lookup(attr_val, "apigatewayv2_4xx_operator", ">=")
+          apigatewayv2_4xx_critical          = lookup(attr_val, "apigatewayv2_4xx_critical", 1)
+          apigatewayv2_4xx_critical_recovery = lookup(attr_val, "apigatewayv2_4xx_critical_recovery", 0)
+          apigatewayv2_5xx_timeframe         = lookup(attr_val, "apigatewayv2_5xx_timeframe", "last_5m")
+          apigatewayv2_5xx_operator          = lookup(attr_val, "apigatewayv2_5xx_operator", ">=")
+          apigatewayv2_5xx_critical          = lookup(attr_val, "apigatewayv2_5xx_critical", 1)
+          apigatewayv2_5xx_critical_recovery = lookup(attr_val, "apigatewayv2_5xx_critical_recovery", 0)
         }))
       }
     ]
@@ -111,9 +133,17 @@ locals {
       for attr_key, attr_val in var.cloudfront_monitor.attributes : {
         key = "${attr_key}/cloudfront/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/cloudfront/${item}.json", {
-          name                 = lookup(attr_val, "name", attr_val.distribution_id)
-          distribution_id      = attr_val.distribution_id
-          notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
+          name                                  = lookup(attr_val, "name", attr_val.distribution_id)
+          distribution_id                       = attr_val.distribution_id
+          notification_targets                  = lookup(attr_val, "notification_targets", var.notification_targets)
+          cloudfront_4xxerror_timeframe         = lookup(attr_val, "cloudfront_4xxerror_timeframe", "last_5m")
+          cloudfront_4xxerror_operator          = lookup(attr_val, "cloudfront_4xxerror_operator", ">=")
+          cloudfront_4xxerror_critical          = lookup(attr_val, "cloudfront_4xxerror_critical", 1)
+          cloudfront_4xxerror_critical_recovery = lookup(attr_val, "cloudfront_4xxerror_critical", 0)
+          cloudfront_5xxerror_timeframe         = lookup(attr_val, "cloudfront_5xxerror_timeframe", "last_5m")
+          cloudfront_5xxerror_operator          = lookup(attr_val, "cloudfront_5xxerror_operator", ">=")
+          cloudfront_5xxerror_critical          = lookup(attr_val, "cloudfront_5xxerror_critical", 1)
+          cloudfront_5xxerror_critical_recovery = lookup(attr_val, "cloudfront_5xxerror_critical", 0)
         }))
       }
     ]
@@ -145,8 +175,11 @@ locals {
       for attr_key, attr_val in var.docdb_monitor.attributes : {
         key = "${attr_key}/docdb/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/docdb/${item}.json", {
-          db_cluster_identifier = attr_val.db_cluster_identifier
-          notification_targets  = lookup(attr_val, "notification_targets", var.notification_targets)
+          db_cluster_identifier           = attr_val.db_cluster_identifier
+          notification_targets            = lookup(attr_val, "notification_targets", var.notification_targets)
+          docdb_cpu_utilization_timeframe = lookup(attr_val, "docdb_cpu_utilization_timeframe", "last_15m")
+          docdb_cpu_utilization_operator  = lookup(attr_val, "docdb_cpu_utilization_operator", ">")
+          docdb_cpu_utilization_critical  = lookup(attr_val, "docdb_cpu_utilization_critical", 80)
         }))
       }
     ]
@@ -178,8 +211,20 @@ locals {
       for attr_key, attr_val in var.dynamodb_monitor.attributes : {
         key = "${attr_key}/dynamodb/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/dynamodb/${item}.json", {
-          table_name           = attr_val.table_name
-          notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
+          table_name                        = attr_val.table_name
+          notification_targets              = lookup(attr_val, "notification_targets", var.notification_targets)
+          dynamodb_read_throttle_timeframe  = lookup(attr_val, "dynamodb_read_throttle_timeframe", "last_5m")
+          dynamodb_read_throttle_operator   = lookup(attr_val, "dynamodb_read_throttle_operator", ">")
+          dynamodb_read_throttle_critical   = lookup(attr_val, "dynamodb_read_throttle_critical", 0)
+          dynamodb_write_throttle_timeframe = lookup(attr_val, "dynamodb_write_throttle_timeframe", "last_5m")
+          dynamodb_write_throttle_operator  = lookup(attr_val, "dynamodb_write_throttle_operator", ">")
+          dynamodb_write_throttle_critical  = lookup(attr_val, "dynamodb_write_throttle_critical", 0)
+          dynamodb_system_errors_timeframe  = lookup(attr_val, "dynamodb_system_errors_timeframe", "last_5m")
+          dynamodb_system_errors_operator   = lookup(attr_val, "dynamodb_system_errors_operator", ">")
+          dynamodb_system_errors_critical   = lookup(attr_val, "dynamodb_system_errors_critical", 0)
+          dynamodb_user_errors_timeframe    = lookup(attr_val, "dynamodb_user_errors_timeframe", "last_5m")
+          dynamodb_user_errors_operator     = lookup(attr_val, "dynamodb_user_errors_operator", ">")
+          dynamodb_user_errors_critical     = lookup(attr_val, "dynamodb_user_errors_critical", 0)
         }))
       }
     ]
@@ -211,9 +256,18 @@ locals {
       for attr_key, attr_val in var.ecs_monitor.attributes : {
         key = "${attr_key}/ecs/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/ecs/${item}.json", {
-          service_name         = attr_val.service_name
-          runbook_url          = lookup(attr_val, "runbook_url", "")
-          notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
+          service_name                              = attr_val.service_name
+          runbook_url                               = lookup(attr_val, "runbook_url", "")
+          notification_targets                      = lookup(attr_val, "notification_targets", var.notification_targets)
+          ecs_cpu_utilization_timeframe             = lookup(attr_val, "ecs_cpu_utilization_timeframe", "last_15m")
+          ecs_cpu_utilization_operator              = lookup(attr_val, "ecs_cpu_utilization_operator", ">")
+          ecs_cpu_utilization_critical_threshold    = lookup(attr_val, "ecs_cpu_utilization_critical_threshold", 80)
+          ecs_memory_utilization_timeframe          = lookup(attr_val, "ecs_memory_utilization_timeframe", "last_15m")
+          ecs_memory_utilization_operator           = lookup(attr_val, "ecs_memory_utilization_operator", ">")
+          ecs_memory_utilization_critical_threshold = lookup(attr_val, "ecs_memory_utilization_critical_threshold", 80)
+          ecs_running_instance_timeframe            = lookup(attr_val, "ecs_running_instance_timeframe", "last_5m")
+          ecs_running_instance_operator             = lookup(attr_val, "ecs_running_instance_operator", "<=")
+          ecs_running_instance_critical             = lookup(attr_val, "ecs_running_instance_critical", 0)
         }))
       }
     ]
@@ -245,8 +299,11 @@ locals {
       for attr_key, attr_val in var.lambda_monitor.attributes : {
         key = "${attr_key}/lambda/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/lambda/${item}.json", {
-          function_name        = attr_val.function_name
-          notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
+          function_name              = attr_val.function_name
+          notification_targets       = lookup(attr_val, "notification_targets", var.notification_targets)
+          lambda_throttles_timeframe = lookup(attr_val, "lambda_throttles_timeframe", "last_15m")
+          lambda_throttles_operator  = lookup(attr_val, "lambda_throttles_operator", ">")
+          lambda_throttles_critical  = lookup(attr_val, "lambda_throttles_critical", 100)
         }))
       }
     ]
@@ -277,9 +334,12 @@ locals {
       for attr_key, attr_val in var.nlb_monitor.attributes : {
         key = "${attr_key}/nlb/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/nlb/${item}.json", {
-          lb_name              = attr_val.lb_name
-          lb_dns_name          = attr_val.lb_dns_name
-          notification_targets = lookup(attr_val, "notification_targets", var.notification_targets)
+          lb_name                         = attr_val.lb_name
+          lb_dns_name                     = attr_val.lb_dns_name
+          notification_targets            = lookup(attr_val, "notification_targets", var.notification_targets)
+          nlb_tcpelbreset_count_timeframe = lookup(attr_val, "nlb_tcpelbreset_count_timeframe", "last_5m")
+          nlb_tcpelbreset_count_operator  = lookup(attr_val, "nlb_tcpelbreset_count_operator", ">")
+          nlb_tcpelbreset_count_critical  = lookup(attr_val, "nlb_tcpelbreset_count_critical", 0)
         }))
       }
     ]
@@ -311,8 +371,11 @@ locals {
       for attr_key, attr_val in var.rds_monitor.attributes : {
         key = "${attr_key}/rds/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/rds/${item}.json", {
-          db_cluster_identifier = attr_val.db_cluster_identifier
-          notification_targets  = lookup(attr_val, "notification_targets", var.notification_targets)
+          db_cluster_identifier         = attr_val.db_cluster_identifier
+          notification_targets          = lookup(attr_val, "notification_targets", var.notification_targets)
+          rds_cpu_utilization_timeframe = lookup(attr_val, "rds_cpu_utilization_timeframe", "last_5m")
+          rds_cpu_utilization_operator  = lookup(attr_val, "rds_cpu_utilization_operator", ">")
+          rds_cpu_utilization_critical  = lookup(attr_val, "rds_cpu_utilization_critical", 80)
         }))
       }
     ]
@@ -345,17 +408,30 @@ locals {
         key = "${attr_key}/spring/${item}"
         value = jsondecode(templatefile("${path.module}/monitors/spring/${item}.json", {
           env                                    = attr_val.env
+          runbook_url                            = lookup(attr_val, "runbook_url", "")
+          service_name                           = attr_val.service_name
+          notification_targets                   = lookup(attr_val, "notification_targets", var.notification_targets)
+          p50_latency_timeframe                  = lookup(attr_val, "p50_latency_timeframe", "last_5m")
+          p50_latency_operator                   = lookup(attr_val, "p50_latency_operator", ">")
           p50_critical_threshold                 = lookup(attr_val, "p50_critical_threshold", 0.8)
           p50_warning_threshold                  = lookup(attr_val, "p50_warning_threshold", 0.7)
+          p90_latency_timeframe                  = lookup(attr_val, "p90_latency_timeframe", "last_5m")
+          p90_latency_operator                   = lookup(attr_val, "p90_latency_operator", ">")
           p90_critical_threshold                 = lookup(attr_val, "p90_critical_threshold", 1)
           p90_warning_threshold                  = lookup(attr_val, "p90_warning_threshold", 0.9)
+          error_rate_timeframe                   = lookup(attr_val, "error_rate_timeframe", "last_10m")
+          error_rate_operator                    = lookup(attr_val, "error_rate_operator", ">")
           error_rate_warning_threshold           = lookup(attr_val, "error_rate_warning_threshold", 0.01)
           error_rate_critical_threshold          = lookup(attr_val, "error_rate_critical_threshold", 0.05)
           throughput_critical_recovery_threshold = lookup(attr_val, "throughput_critical_recovery_threshold", 0)
           throughput_critical_threshold          = lookup(attr_val, "throughput_critical_threshold", 1)
-          runbook_url                            = lookup(attr_val, "runbook_url", "")
-          service_name                           = attr_val.service_name
-          notification_targets                   = lookup(attr_val, "notification_targets", var.notification_targets)
+          throughput_timeframe                   = lookup(attr_val, "throughput_timeframe", "last_1h")
+          throughput_alert_window                = lookup(attr_val, "throughput_alert_window", "last_5m")
+          throughput_seasonality                 = lookup(attr_val, "throughput_seasonality", "monthly")
+          throughput_recovery_window             = lookup(attr_val, "throughput_recovery_window", "last_5m")
+          throughput_trigger_window              = lookup(attr_val, "throughput_trigger_window", "last_5m")
+          throughput_operator                    = lookup(attr_val, "throughput_operator", ">=")
+          throughput_deviations                  = lookup(attr_val, "throughput_deviations", 5)
         }))
       }
     ]
@@ -389,9 +465,15 @@ locals {
         value = jsondecode(templatefile("${path.module}/monitors/service/${item}.json", {
           env                                  = attr_val.env
           latest_deployment_critical_threshold = lookup(attr_val, "latest_deployment_critical_threshold", 0)
+          latest_deployment_timeframe          = lookup(attr_val, "latest_deployment_timeframe", "15m")
+          latest_deployment_operator           = lookup(attr_val, "latest_deployment_operator", ">")
           log_warning_threshold                = lookup(attr_val, "log_warning_threshold", 1)
           log_critical_threshold               = lookup(attr_val, "log_critical_threshold", 5)
+          log_timeframe                        = lookup(attr_val, "log_timeframe", "15m")
+          log_operator                         = lookup(attr_val, "log_operator", ">")
           faulty_deployment_critical_threshold = lookup(attr_val, "faulty_deployment_critical_threshold", 0)
+          faulty_deployment_timeframe          = lookup(attr_val, "faulty_deployment_timeframe", "70m")
+          faulty_deployment_operator           = lookup(attr_val, "faulty_deployment_operator", ">")
           runbook_url                          = lookup(attr_val, "runbook_url", "")
           service_name                         = attr_val.service_name
           notification_targets                 = lookup(attr_val, "notification_targets", var.notification_targets)

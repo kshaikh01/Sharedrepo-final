@@ -2,11 +2,11 @@
     "name": "apigatewayv2.5xx: ${name}",
     "type": "metric alert",
     "message": "5xx Monitor triggered. Notify: ${notification_targets}",
-    "query": "sum(last_5m):max:aws.apigateway.5xx{apiid:${api_id}} >= 1",
+    "query": "sum(${apigatewayv2_4xx_timeframe}):max:aws.apigateway.5xx{apiid:${api_id}} ${apigatewayv2_5xx_operator} ${apigatewayv2_5xx_critical}",
     "evaluation_delay": 900,
     "require_full_window": false,
     "monitor_thresholds": {
-        "critical": 1,
-        "critical_recovery": 0
+        "critical": "${apigatewayv2_5xx_critical}",
+        "critical_recovery": "${apigatewayv2_5xx_critical_recovery}"
     }
 }

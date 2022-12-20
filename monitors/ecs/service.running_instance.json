@@ -1,7 +1,7 @@
 {
 	"name": "ecs.service.running_instance: ${service_name}",
 	"type": "query alert",
-	"query": "sum(last_5m):sum:aws.ecs.service.running{service:${service_name}} <= 0",
+	"query": "sum(${ecs_running_instance_timeframe}):sum:aws.ecs.service.running{service:${service_name}} ${ecs_running_instance_operator} ${ecs_running_instance_critical}",
 	"message": "ecs service running instance monitor triggered for ${service_name} Runbook: ${runbook_url} Notify: ${notification_targets}",
 	"tags": [
 		"service:${service_name}",

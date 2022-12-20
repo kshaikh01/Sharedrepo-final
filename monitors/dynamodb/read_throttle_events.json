@@ -1,7 +1,7 @@
 {
 	"name": "dynamodb.read_throttle_events: ${table_name}",
 	"type": "metric alert",
-	"query": "sum(last_5m):sum:aws.dynamodb.read_throttle_events{tablename:${table_name}} by {tablename} > 0",
+	"query": "sum(${dynamodb_read_throttle_timeframe}):sum:aws.dynamodb.read_throttle_events{tablename:${table_name}} by {tablename} ${dynamodb_read_throttle_operator} ${dynamodb_read_throttle_critical}",
 	"message": "dynamodb read throttle event monitor triggered for ${table_name}. Notify: ${notification_targets}",
 	"options": {
 		"notify_audit": false,
@@ -12,7 +12,7 @@
 		"renotify_interval": "0",
 		"evaluation_delay": 900,
 		"thresholds": {
-			"critical": 0
+			"critical": "${dynamodb_read_throttle_critical}"
 		}
 	}
 }

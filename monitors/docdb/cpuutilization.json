@@ -1,7 +1,7 @@
 {
 	"name": "docdb.cpuutilization: ${db_cluster_identifier}",
 	"type": "metric alert",
-	"query": "avg(last_5m):avg:aws.docdb.cpuutilization{dbclusteridentifier:${db_cluster_identifier}} by {dbclusteridentifier} > 80",
+	"query": "avg(${docdb_cpu_utilization_timeframe}):avg:aws.docdb.cpuutilization{dbclusteridentifier:${db_cluster_identifier}} by {dbclusteridentifier} ${docdb_cpu_utilization_operator} ${docdb_cpu_utilization_critical}",
 	"message": "docdb cluster cpututilization monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
 	"options": {
 		"notify_audit": false,
@@ -12,7 +12,7 @@
 		"renotify_interval": "0",
 		"evaluation_delay": 900,
 		"thresholds": {
-			"critical": 80
+			"critical": "${docdb_cpu_utilization_critical}"
 		}
 	}
 }

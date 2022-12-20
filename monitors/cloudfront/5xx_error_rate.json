@@ -2,11 +2,11 @@
     "name": "cloudfront.5xx: ${name}",
     "type": "metric alert",
     "message": "5xx Monitor triggered. Notify: ${notification_targets}",
-    "query": "sum(last_5m):max:aws.cloudfront.5xx_error_rate{apiid:${distribution_id}} >= 1",
+    "query": "sum(${cloudfront_5xxerror_timeframe}):max:aws.cloudfront.5xx_error_rate{apiid:${distribution_id}} {cloudfront_5xxerror_operator} ${cloudfront_5xxerror_critical}",
     "evaluation_delay": 900,
     "require_full_window": false,
     "monitor_thresholds": {
-        "critical": 1,
-        "critical_recovery": 0
+        "critical": "${cloudfront_5xxerror_critical}",
+        "critical_recovery": "${cloudfront_5xxerror_critical_recovery}"
     }
 }
