@@ -1,0 +1,17 @@
+{
+  "name": "dynamodb.successful_request_latency",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.successful_request_latency{tablename:${table_name}} by {tablename} ${successful_request_latency_operator} ${successful_request_latency_critical}",
+  "message": "dynamodb successful request latency monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${successful_request_latency_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "new_group_delay": 60
+  }
+}

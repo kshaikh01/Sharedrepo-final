@@ -123,6 +123,7 @@ module "test" {
     attributes = {
       for key, val in local.services : key => {
         table_name = random_string.mock_resource_id["${key}_dynamodb"].result
+
       }
     }
   }

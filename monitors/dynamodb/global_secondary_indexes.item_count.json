@@ -1,0 +1,18 @@
+{
+  "name": "dynamodb.global_secondary_indexes.item_count",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.global_secondary_indexes.item_count{*} ${global_secondary_indexes_item_count_operator} ${global_secondary_indexes_item_count_critical}",
+  "message": "dynamodb global secondary indexes item count monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${global_secondary_indexes_item_count_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "evaluation_delay": 900,
+    "new_group_delay": 60
+  }
+}

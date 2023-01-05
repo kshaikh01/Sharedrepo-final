@@ -1,0 +1,18 @@
+{
+  "name": "dynamodb.returned_item_count.maximum",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.returned_item_count.maximum{name::${table_name}} by {tablename} ${returned_item_count_maximum_operator} ${returned_item_count_maximum_critical}",
+  "message": "dynamodb returned item count maximum event monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${returned_item_count_maximum_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "evaluation_delay": 900,
+    "new_group_delay": 60
+  }
+}

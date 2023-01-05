@@ -1,0 +1,17 @@
+{
+  "name": "dynamodb.time_to_live_deleted_item_count",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.time_to_live_deleted_item_count{tablename:*} by {tablename}.as_count() ${time_to_live_deleted_item_count_operator} ${time_to_live_deleted_item_count_critical}",
+  "message": "dynamodb time to live deleted item count monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${time_to_live_deleted_item_count_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "new_group_delay": 60
+  }
+}

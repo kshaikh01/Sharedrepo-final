@@ -1,0 +1,17 @@
+{
+  "name": "dynamodb.account_max_reads",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.account_max_reads{*}.as_count() ${account_max_reads_operator} ${account_max_reads_critical}",
+  "message": "dynamodb account max reads monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${account_max_reads_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "evaluation_delay": 900
+  }
+}

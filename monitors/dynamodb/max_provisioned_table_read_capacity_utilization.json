@@ -1,0 +1,17 @@
+{
+  "name": "dynamodb.max_provisioned_table_read_capacity_utilization",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.max_provisioned_table_read_capacity_utilization{*} ${max_provisioned_table_read_capacity_utilization_operator} ${max_provisioned_table_read_capacity_utilization_critical}",
+  "message": "dynamodb max provisoned table read capacity utilization monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${max_provisioned_table_read_capacity_utilization_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "evaluation_delay": 900
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "dynamodb.conditional_check_failed_requests",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.conditional_check_failed_requests{tablename:*} by {tablename}.as_count() ${conditional_check_failed_requests_operator} ${conditional_check_failed_requests_critical}",
+  "message": "dynamodb conditional check failed event monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${conditional_check_failed_requests_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "new_group_delay": 60
+  }
+}

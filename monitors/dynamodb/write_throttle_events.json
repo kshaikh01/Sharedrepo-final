@@ -1,7 +1,7 @@
 {
 	"name": "dynamodb.write_throttle_events: ${table_name}",
 	"type": "metric alert",
-	"query": "sum(${dynamodb_write_throttle_timeframe}):sum:aws.dynamodb.write_throttle_events{tablename:${table_name}} by {tablename} ${dynamodb_write_throttle_operator} ${dynamodb_write_throttle_critical}",
+	"query": "sum(last_1h):sum:aws.dynamodb.write_throttle_events{tablename:${table_name}} by {tablename} ${write_throttle_events_operator} ${write_throttle_events_critical}",
 	"message": "dynamodb write throttle event monitor triggered for ${table_name}. Notify: ${notification_targets}",
 	"options": {
 		"notify_audit": false,
@@ -12,7 +12,7 @@
 		"renotify_interval": "0",
 		"evaluation_delay": 900,
 		"thresholds": {
-			"critical": "${dynamodb_write_throttle_critical}"
+			"critical": "${write_throttle_events_critical}"
 		}
 	}
 }

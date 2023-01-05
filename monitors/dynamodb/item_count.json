@@ -1,0 +1,18 @@
+{
+  "name": "dynamodb.item_count",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.returned_item_count{tablename:*} by {tablename} ${item_count_operator} ${item_count_critical}",
+  "message": "dynamodb item count monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${item_count_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "evaluation_delay": 900,
+    "new_group_delay": 60
+  }
+}

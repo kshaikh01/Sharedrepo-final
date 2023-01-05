@@ -1,0 +1,17 @@
+{
+  "name": "dynamodb.consumed_write_capacity_units",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.consumed_write_capacity_units{tablename:*} by {tablename} ${consumed_write_capacity_units_operator} ${consumed_write_capacity_units_critical}",
+  "message": "dynamodb consumed write capacity units monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${consumed_write_capacity_units_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "new_group_delay": 60
+  }
+}

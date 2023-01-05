@@ -1,7 +1,7 @@
 {
 	"name": "dynamodb.user_errors: ${table_name}",
 	"type": "metric alert",
-	"query": "sum(${dynamodb_user_errors_timeframe}):sum:aws.dynamodb.user_errors{tablename:${table_name}} by {tablename} ${dynamodb_user_errors_operator} ${dynamodb_user_errors_critical}",
+	"query": "sum(last_1h):sum:aws.dynamodb.user_errors{tablename:${table_name}} by {tablename} ${user_errors_operator} ${user_errors_critical}",
 	"message": "dynamodb user errors monitor triggered for ${table_name}. Notify: ${notification_targets}",
 	"options": {
 		"notify_audit": false,
@@ -12,7 +12,7 @@
 		"renotify_interval": "0",
 		"evaluation_delay": 900,
 		"thresholds": {
-			"critical": "${dynamodb_user_errors_critical}"
+			"critical": "${user_errors_critical}"
 		}
 	}
 }

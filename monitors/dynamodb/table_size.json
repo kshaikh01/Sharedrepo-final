@@ -1,0 +1,18 @@
+{
+  "name": "dynamodb.table_size",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.table_size{tablename:*} by {tablename} ${table_size_operator} ${table_size_critical}",
+  "message": "dynamodb table size monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${table_size_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "evaluation_delay": 900,
+    "new_group_delay": 60
+  }
+}

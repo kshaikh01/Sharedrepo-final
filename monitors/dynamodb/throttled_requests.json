@@ -1,0 +1,18 @@
+{
+  "name": "dynamodb.throttled_requests",
+  "type": "query alert",
+  "query": "sum(last_1h):sum:aws.dynamodb.throttled_requests{tablename:*} by {tablename}.as_count() ${throttled_requests_operator} ${throttled_requests_critical}",
+  "message": "dynamodb throttled requests monitor triggered. Notify: ${notification_targets}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": "${throttled_requests_critical}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "evaluation_delay": 900,
+    "new_group_delay": 60
+  }
+}
