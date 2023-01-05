@@ -1,0 +1,27 @@
+{
+	"name": "service.excessive_logs: ${service_name} ${env}",
+	"type": "log alert",
+	"query": "logs(\"service:${service_name} env:${env}\").index(\"*\").rollup(\"count\").last(\"${excessive_log_timeframe}\") ${excessive_log_operator} ${excessive_log_critical_threshold}",
+	"message": " Service ${service_name} in env:${env} has extensive logging . Runbook: ${runbook_url} Notify: ${notification_targets}",
+	"tags": [
+    "env:${env}",
+    "service:${service_name}",
+    "type:automated"
+  ],
+	"options": {
+		"thresholds": {
+			"critical": "excessive_log_critical_threshold",
+			"warning": "excessive_log_warning_threshold"
+		},
+		"enable_logs_sample": false,
+		"notify_audit": false,
+		"restriction_query": null,
+		"on_missing_data": "default",
+		"include_tags": true,
+		"groupby_simple_monitor": true,
+		"new_host_delay": 300,
+		"silenced": {}
+	},
+	"priority": null,
+	"restricted_roles": null
+}

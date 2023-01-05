@@ -198,6 +198,7 @@ module "test" {
         latest_deployment_critical_threshold = 0
         log_warning_threshold                = 1
         log_critical_threshold               = 5
+        excessive_log_critical_threshold     = 3000
         faulty_deployment_critical_threshold = 0
         runbook_url                          = "https://foo.bar/page"
         service_name                         = random_string.mock_resource_id["${key}_service"].result
