@@ -1,0 +1,17 @@
+{
+	"name": "lambda.duration.maximum: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda_duration_maximum_timeframe}):sum:aws.lambda.duration.maximum{functionname:${function_name}} ${lambda_duration_maximum_operator} ${lambda_duration_maximum_critical}",
+	"message": "lambda duration maximum monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda_duration_maximum_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"evaluation_delay": 900
+	}
+}

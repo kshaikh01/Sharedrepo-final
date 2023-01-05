@@ -1,0 +1,17 @@
+{
+	"name": "lambda.errors: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda_errors_timeframe}):sum:aws.lambda.errors{functionname:${function_name}} ${lambda_errors_operator} ${lambda_errors_critical}",
+	"message": "lambda errors monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda_errors_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"evaluation_delay": 900
+	}
+}

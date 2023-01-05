@@ -1,0 +1,16 @@
+{
+	"name": "lambda.enhanced.duration: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda_enhanced_duration_timeframe}):sum:aws.lambda.enhanced.duration{functionname:${function_name}} ${lambda_enhanced_duration_operator} ${lambda_enhanced_duration_critical}",
+	"message": "lambda enhanced duration monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda_enhanced_duration_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0
+	}
+}

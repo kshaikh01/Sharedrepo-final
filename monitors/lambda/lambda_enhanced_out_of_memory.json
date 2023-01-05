@@ -1,0 +1,16 @@
+{
+	"name": "lambda.enhanced.out.of.memory: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda_enhanced_out_of_memory_timeframe}):sum:aws.lambda.enhanced.out_of_memory{functionname:${function_name}} ${lambda_enhanced_out_of_memory_operator} ${lambda_enhanced_out_of_memory_critical}",
+	"message": "lambda duration maximum monitor enhanced out of memory triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda_enhanced_out_of_memory_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0
+	}
+}

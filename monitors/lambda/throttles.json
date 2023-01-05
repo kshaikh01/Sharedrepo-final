@@ -1,7 +1,7 @@
 {
 	"name": "lambda.throttles: ${function_name}",
 	"type": "metric alert",
-	"query": "sum(${lambda_throttles_timeframe}):sum:aws.lambda.throttles{functionname:${function_name}} by {functionname}.as_count() ${lambda_throttles_operator} ${lambda_throttles_critical}",
+	"query": "sum(${lambda_throttles_timeframe}):sum:aws.lambda.throttles{functionname:${function_name}} ${lambda_throttles_operator} ${lambda_throttles_critical}",
 	"message": "lambda throttles monitor triggered for ${function_name}. Notify: ${notification_targets}",
 	"options": {
 		"notify_audit": false,

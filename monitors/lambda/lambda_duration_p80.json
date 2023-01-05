@@ -1,0 +1,18 @@
+{
+	"name": "lambda.duration.p80: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda_duration_p80_timeframe}):sum:aws.lambda.duration.p80{functionname:${function_name}} ${lambda_duration_p80_operator} ${lambda_duration_p80_critical}",
+	"message": "lambda duration p80 monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda_duration_p80_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

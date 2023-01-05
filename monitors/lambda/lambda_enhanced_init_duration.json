@@ -1,0 +1,17 @@
+{
+	"name": "lambda.enhanced.init.duration: ${function_name}",
+	"type": "query alert",
+	"query": "avg(${lambda_enhanced_init_duration_timeframe}):avg:aws.lambda.enhanced.init_duration{functionname:${function_name}} ${lambda_enhanced_init_duration_operator} ${lambda_enhanced_init_duration_critical}",
+	"message": "lambda enhanced init duration monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda_enhanced_init_duration_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false
+	}
+}

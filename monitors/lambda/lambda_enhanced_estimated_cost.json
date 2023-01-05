@@ -1,0 +1,16 @@
+{
+	"name": "lambda.enhanced.estimated.cost: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda_enhanced_estimated_cost_timeframe}):sum:aws.lambda.enhanced.estimated_cost{functionname:${function_name}} ${lambda_enhanced_estimated_cost_operator} ${lambda_enhanced_estimated_cost_critical}",
+	"message": "lambda enhanced estimated cost monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda_enhanced_estimated_cost_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0
+	}
+}
