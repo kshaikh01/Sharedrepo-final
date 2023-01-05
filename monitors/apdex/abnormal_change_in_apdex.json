@@ -1,0 +1,25 @@
+{
+  "name": "abnormal change in Apdex for Service ${service_name} ${env}",
+  "type": "query alert",
+  "query": "avg(${abnormal_change_in_apdex_timeframe}):avg:trace.servlet.request.apdex{env:${env},service:${service_name}} > ${abnormal_change_in_apdex_critical_threshold}",
+  "message": "Service ${service_name} Apdex deviated too much from its usual value.\n Notify: ${notification_targets}",
+  "tags": [
+    "service:${service_name}",
+    "env:${env}",
+    "type:automated"
+  ],
+  "options": {
+    "thresholds": {
+      "critical": "${abnormal_change_in_apdex_critical_threshold}",
+      "warning": "${abnormal_change_in_apdex_warning_threshold}"
+    },
+    "notify_audit": false,
+    "require_full_window": false,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "include_tags": true,
+    "silenced": {}
+  },
+  "priority": null,
+  "restricted_roles": null
+}

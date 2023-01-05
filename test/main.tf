@@ -45,7 +45,8 @@ locals {
     "nlb",
     "rds",
     "spring",
-    "service"
+    "service",
+    "apdex"
   ]
   service_resource_list = flatten([
     for key, val in local.services : [
@@ -200,6 +201,17 @@ module "test" {
         faulty_deployment_critical_threshold = 0
         runbook_url                          = "https://foo.bar/page"
         service_name                         = random_string.mock_resource_id["${key}_service"].result
+      }
+    }
+  }
+
+  apdex_monitor = {
+    enabled         = true
+    custom_monitors = null
+    attributes = {
+      for key, val in local.services : key => {
+        env          = "test"
+        service_name = random_string.mock_resource_id["${key}_apdex"].result
       }
     }
   }

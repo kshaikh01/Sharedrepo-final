@@ -94,6 +94,13 @@ variable "service_monitor" {
   }
 }
 
+variable "apdex_monitor" {
+  description = "Map object inputs to generate monitor map for apdex"
+  default = {
+    enabled         = false
+    custom_monitors = null
+  }
+}
 
 variable "notification_targets" {
   type    = string

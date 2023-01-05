@@ -536,6 +536,43 @@ locals {
   }
 
   #--------------------------------------------------------------------------------
+  # apdex
+  catalog_apdex_files         = [for filename in fileset("${path.module}/monitors/apdex/", "*.json") : trimsuffix(filename, ".json")]
+  catalog_apdex_monitors_list = var.apdex_monitor.enabled == true ? local.catalog_apdex_files : []
+  catalog_apdex_list = flatten([
+    for item in local.catalog_apdex_monitors_list : [
+      for attr_key, attr_val in var.apdex_monitor.attributes : {
+        key = "${attr_key}/apdex/${item}"
+        value = jsondecode(templatefile("${path.module}/monitors/apdex/${item}.json", {
+          env                                         = attr_val.env
+          abnormal_change_in_apdex_warning_threshold  = lookup(attr_val, "abnormal_change_in_apdex_warning_threshold", 0.4)
+          abnormal_change_in_apdex_critical_threshold = lookup(attr_val, "abnormal_change_in_apdex_critical_threshold", 0.6)
+          service_name                                = attr_val.service_name
+          abnormal_change_in_apdex_timeframe          = lookup(attr_val, "abnormal_change_in_apdex_timeframe", "last_10m")
+          notification_targets                        = lookup(attr_val, "notification_targets", var.notification_targets)
+        }))
+      }
+    ]
+  ])
+  catalog_apdex = { for item in local.catalog_apdex_list : item.key => item.value }
+
+  custom_apdex_list = var.apdex_monitor.enabled == true && var.apdex_monitor.custom_monitors != null ? flatten([
+    for key, val in var.apdex_monitor.custom_monitors : [
+      for attr_key, attr_val in var.apdex_monitor.attributes :
+      {
+        id         = "${attr_key}/${key}"
+        template   = val
+        attributes = attr_val
+      }
+    ]
+  ]) : []
+  custom_apdex = {
+    for item in local.custom_apdex_list : item.id => jsondecode(templatefile(item.template, merge({
+      notification_targets = lookup(item.attributes, "notification_targets", var.notification_targets)
+    }, item.attributes)))
+  }
+
+  #--------------------------------------------------------------------------------
   monitors_map = merge(
     local.catalog_alb,
     local.custom_alb,
@@ -568,7 +605,10 @@ locals {
     local.custom_spring,
 
     local.catalog_service,
-    local.custom_service
+    local.custom_service,
+
+    local.catalog_apdex,
+    local.custom_apdex
   )
   monitors = { for key, val in local.monitors_map : key => val if !contains(var.exclude_monitors, key) }
 }
