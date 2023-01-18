@@ -1,0 +1,18 @@
+{
+	"name": "lambda_provisioned_concurrency_spillover_invocations: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda_provisioned_concurrency_spillover_invocations_timeframe}):sum:aws.lambda.provisioned_concurrency_spillover_invocations{functionname:${function_name}} ${lambda_provisioned_concurrency_spillover_invocations_operator} ${lambda_provisioned_concurrency_spillover_invocations_critical}",
+	"message": "lambda_provisioned_concurrency_spillover_invocations monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda_provisioned_concurrency_spillover_invocations_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

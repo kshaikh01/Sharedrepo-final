@@ -104,3 +104,75 @@
 |  lambda_duration_p80_timeframe | Timeframe for the lambda_duration_p80 monitor. | `string`| `"last_15m"` | no |
 |  lambda_duration_p80_operator | Operator for the  lambda_duration_p80 monitor [>, <, >=, <=,] | `string`| `">"` | no |
 |  lambda_duration_p80_critical | Critical threshold for the  lambda_duration_p80 monitor. | `100` | `number`| no |
+
+### lambda_memorysize monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda_memorysize_timeframe | Timeframe for the lambda_memorysize monitor. | `string`| `"last_15m"` | no |
+|  lambda_memorysize_operator | Operator for the  lambda_memorysize monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda_memorysize_critical | Critical threshold for the  lambda_memorysize monitor. | `100` | `number`| no |
+
+### lambda_enhanced_max_memory_used monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda_enhanced_max_memory_used_timeframe | Timeframe for the lambda_enhanced_max_memory_used monitor. | `string`| `"last_15m"` | no |
+|  lambda_enhanced_max_memory_used_operator | Operator for the  lambda_enhanced_max_memory_used monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda_enhanced_max_memory_used_critical | Critical threshold for the  lambda_enhanced_max_memory_used monitor. | `100` | `number`| no |
+
+### lambda_invocations monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda_invocations_timeframe | Timeframe for the lambda_invocations monitor. | `string`| `"last_15m"` | no |
+|  lambda_invocations_operator | Operator for the  lambda_invocations monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda_invocations_critical | Critical threshold for the  lambda_invocations monitor. | `100` | `number`| no |
+
+### lambda_enhanced_invocations monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda_enhanced_invocations_timeframe | Timeframe for the lambda_enhanced_invocations monitor. | `string`| `"last_15m"` | no |
+|  lambda_enhanced_invocations_operator | Operator for the  lambda_enhanced_invocations monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda_enhanced_invocations_critical | Critical threshold for the  lambda_enhanced_invocations monitor. | `100` | `number`| no |
+
+### lambda_provisioned_concurrency_invocations monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda_provisioned_concurrency_invocations_timeframe | Timeframe for the lambda_provisioned_concurrency_invocations monitor. | `string`| `"last_15m"` | no |
+|  lambda_provisioned_concurrency_invocations_operator | Operator for the  lambda_provisioned_concurrency_invocations monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda_provisioned_concurrency_invocations_critical | Critical threshold for the  lambda_provisioned_concurrency_invocations monitor. | `100` | `number`| no |
+
+### lambda_provisioned_concurrency_utilization monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda_provisioned_concurrency_utilization_timeframe | Timeframe for the lambda_provisioned_concurrency_utilization monitor. | `string`| `"last_15m"` | no |
+|  lambda_provisioned_concurrency_utilization_operator | Operator for the  lambda_provisioned_concurrency_utilization monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda_provisioned_concurrency_utilization_critical | Critical threshold for the  lambda_provisioned_concurrency_utilization monitor. | `100` | `number`| no |
+
+### lambda_provisioned_concurrent_executions monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda_provisioned_concurrent_executions_timeframe | Timeframe for the lambda_provisioned_concurrent_executions monitor. | `string`| `"last_15m"` | no |
+|  lambda_provisioned_concurrent_executions_operator | Operator for the  lambda_provisioned_concurrent_executions monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda_provisioned_concurrent_executions_critical | Critical threshold for the  lambda_provisioned_concurrent_executions monitor. | `100` | `number`| no |
+
+### lambda_provisioned_concurrency_spillover_invocations monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda_provisioned_concurrency_spillover_invocations_timeframe | Timeframe for the lambda_provisioned_concurrency_spillover_invocations monitor. | `string`| `"last_15m"` | no |
+|  lambda_provisioned_concurrency_spillover_invocations_operator | Operator for the  lambda_provisioned_concurrency_spillover_invocations monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda_provisioned_concurrency_spillover_invocations_critical | Critical threshold for the  lambda_provisioned_concurrency_spillover_invocations monitor. | `100` | `number`| no |
+
+### lambda_enhanced_timeouts monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda_enhanced_timeouts_timeframe | Timeframe for the lambda_enhanced_timeouts monitor. | `string`| `"last_15m"` | no |
+|  lambda_enhanced_timeouts_operator | Operator for the  lambda_enhanced_timeouts monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda_enhanced_timeouts_critical | Critical threshold for the  lambda_enhanced_timeouts monitor. | `100` | `number`| no |

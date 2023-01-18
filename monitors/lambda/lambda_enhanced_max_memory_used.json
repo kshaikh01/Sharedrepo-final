@@ -1,0 +1,18 @@
+{
+	"name": "lambda_enhanced_max_memory_used: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda_enhanced_max_memory_used_timeframe}):sum:aws.lambda.enhanced.max_memory_used{functionname:${function_name}} ${lambda_enhanced_max_memory_used_operator} ${lambda_enhanced_max_memory_used_critical}",
+	"message": "lambda_enhanced_max_memory_used monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda_enhanced_max_memory_used_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}
