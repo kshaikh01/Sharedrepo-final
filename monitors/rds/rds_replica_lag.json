@@ -1,0 +1,18 @@
+{
+	"name": "rds_replica_lag: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_replica_lag_timeframe}):avg:aws.rds.replica_lag{dbclusteridentifier:${db_cluster_identifier}} ${rds_replica_lag_operator} ${rds_replica_lag_critical}",
+	"message": "rds_replica_lag monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_replica_lag_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

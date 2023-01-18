@@ -1,0 +1,18 @@
+{
+	"name": "rds_maximum_used_transaction_ids: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_maximum_used_transaction_ids_timeframe}):avg:aws.rds.maximum_used_transaction_ids{dbclusteridentifier:${db_cluster_identifier}} ${rds_maximum_used_transaction_ids_operator} ${rds_maximum_used_transaction_ids_critical}",
+	"message": "rds_maximum_used_transaction_ids monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_maximum_used_transaction_ids_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

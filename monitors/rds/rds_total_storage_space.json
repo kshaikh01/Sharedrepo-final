@@ -1,0 +1,18 @@
+{
+	"name": "rds_total_storage_space: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_total_storage_space_timeframe}):avg:aws.rds.total_storage_space{dbclusteridentifier:${db_cluster_identifier}} ${rds_total_storage_space_operator} ${rds_total_storage_space_critical}",
+	"message": "rds_total_storage_space monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_total_storage_space_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

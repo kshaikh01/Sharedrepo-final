@@ -1,0 +1,18 @@
+{
+	"name": "rds_commit_latency: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_commit_latency_timeframe}):avg:aws.rds.commit_latency{dbclusteridentifier:${db_cluster_identifier}} ${rds_commit_latency_operator} ${rds_commit_latency_critical}",
+	"message": "rds_commit_latency monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_commit_latency_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

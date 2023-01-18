@@ -1,0 +1,18 @@
+{
+	"name": "rds_burst_balance: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_burst_balance_timeframe}):avg:aws.rds.burst_balance{dbclusteridentifier:${db_cluster_identifier}} ${rds_burst_balance_operator} ${rds_burst_balance_critical}",
+	"message": "rds_burst_balance monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_burst_balance_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

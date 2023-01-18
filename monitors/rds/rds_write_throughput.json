@@ -1,0 +1,18 @@
+{
+	"name": "rds_write_throughput: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_write_throughput_timeframe}):avg:aws.rds.write_throughput{dbclusteridentifier:${db_cluster_identifier}} ${rds_write_throughput_operator} ${rds_write_throughput_critical}",
+	"message": "rds_write_throughput monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_write_throughput_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

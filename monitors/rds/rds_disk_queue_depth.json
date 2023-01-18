@@ -1,0 +1,18 @@
+{
+	"name": "rds_disk_queue_depth: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_disk_queue_depth_timeframe}):avg:aws.rds.disk_queue_depth{dbclusteridentifier:${db_cluster_identifier}} ${rds_disk_queue_depth_operator} ${rds_disk_queue_depth_critical}",
+	"message": "rds_disk_queue_depth monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_disk_queue_depth_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

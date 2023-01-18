@@ -1,0 +1,18 @@
+{
+	"name": "rds_network_receive_throughput: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_network_receive_throughput_timeframe}):avg:aws.rds.network_receive_throughput{dbclusteridentifier:${db_cluster_identifier}} ${rds_network_receive_throughput_operator} ${rds_network_receive_throughput_critical}",
+	"message": "rds_network_receive_throughput monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_network_receive_throughput_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

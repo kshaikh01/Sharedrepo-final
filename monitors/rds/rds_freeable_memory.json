@@ -1,0 +1,18 @@
+{
+	"name": "rds_freeable_memory: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_freeable_memory_timeframe}):avg:aws.rds.freeable_memory{dbclusteridentifier:${db_cluster_identifier}} ${rds_freeable_memory_operator} ${rds_freeable_memory_critical}",
+	"message": "rds_freeable_memory monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_freeable_memory_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

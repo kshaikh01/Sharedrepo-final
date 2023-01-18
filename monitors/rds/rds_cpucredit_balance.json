@@ -1,0 +1,18 @@
+{
+	"name": "rds_cpucredit_balance: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_cpucredit_balance_timeframe}):avg:aws.rds.transaction_logs_disk_usage{dbclusteridentifier:${db_cluster_identifier}} ${rds_cpucredit_balance_operator} ${rds_cpucredit_balance_critical}",
+	"message": "rds_cpucredit_balance monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_cpucredit_balance_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

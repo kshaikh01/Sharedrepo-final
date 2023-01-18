@@ -1,0 +1,18 @@
+{
+	"name": "rds_dbload: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "avg(${rds_dbload_timeframe}):avg:aws.rds.dbload{dbclusteridentifier:${db_cluster_identifier}} ${rds_dbload_operator} ${rds_dbload_critical}",
+	"message": "rds_dbload monitor triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${rds_dbload_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}
