@@ -1,0 +1,18 @@
+{
+	"name": "docdb_cpucredit_balance_maximum: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "sum(${docdb_cpucredit_balance_maximum_timeframe}):sum:aws.docdb.cpucredit_balance.maximum{dbclusteridentifier:${db_cluster_identifier}}.as_count() ${docdb_cpucredit_balance_maximum_operator} ${docdb_cpucredit_balance_maximum_critical}",
+	"message": "docdb_cpucredit_balance_maximum monitor is triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${docdb_cpucredit_balance_maximum_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

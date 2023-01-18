@@ -1,0 +1,18 @@
+{
+	"name": "docdb_cpucredit_balance_sum: ${db_cluster_identifier}",
+	"type": "query alert",
+	"query": "sum(${docdb_cpucredit_balance_sum_timeframe}):sum:aws.docdb.cpucredit_balance.sum{dbclusteridentifier:${db_cluster_identifier}}.as_count() ${docdb_cpucredit_balance_sum_operator} ${docdb_cpucredit_balance_sum_critical}",
+	"message": "docdb_cpucredit_balance_sum monitor is triggered for dbclusteridentifier ${db_cluster_identifier}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${docdb_cpucredit_balance_sum_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}
