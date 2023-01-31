@@ -60,6 +60,49 @@ locals {
           apigateway_5xxerror_operator          = lookup(attr_val, "apigateway_5xxerror_operator", ">=")
           apigateway_5xxerror_critical          = lookup(attr_val, "apigateway_5xxerror_critical", 1)
           apigateway_5xxerror_critical_recovery = lookup(attr_val, "apigateway_5xxerror_critical", 0)
+          apigateway_count_timeframe         = lookup(attr_val, "apigateway_count_timeframe", "last_5m")
+          apigateway_count_operator          = lookup(attr_val, "apigateway_count_operator", ">=")
+          apigateway_count_critical          = lookup(attr_val, "apigateway_count_critical", 1)
+          apigateway_latency_maximum        = lookup(attr_val, "apigateway_latency_maximum_timeframe", "last_5m")
+          apigateway_latency_maximum         = lookup(attr_val, "apigateway_latency_maximum_operator", ">=")
+          apigateway_latency_maximum          = lookup(attr_val, "apigateway_latency_maximum_critical", 1)
+          apigateway_latency_minimum        = lookup(attr_val, "apigateway_integration_latency_minimum_timeframe", "last_5m")
+          apigateway_latency_minimum        = lookup(attr_val, "apigateway_integration_latency_minimum_operator", ">=")
+          apigateway_latency_minimum         = lookup(attr_val, "apigateway_integration_latency_minimum_critical", 1)
+          apigateway_integration_latency_p90       = lookup(attr_val, "apigateway_integration_latency_p90_timeframe", "last_5m")
+          apigateway_integration_latency_p90       = lookup(attr_val, "apigateway_integration_latency_p90_operator", ">=")
+          apigateway_integration_latency_p90       = lookup(attr_val, "apigateway_integration_latency_p90_critical", 1)
+          apigateway_integration_latency_p95       = lookup(attr_val, "apigateway_integration_latency_p95_timeframe", "last_5m")
+          apigateway_integration_latency_p95       = lookup(attr_val, "apigateway_integration_latency_p95_operator", ">=")
+          apigateway_integration_latency_p95       = lookup(attr_val, "apigateway_integration_latency_p95_critical", 1)
+          apigateway_integration_latency_p99       = lookup(attr_val, "apigateway_integration_latency_p99_timeframe", "last_5m")
+          apigateway_integration_latency_p99       = lookup(attr_val, "apigateway_integration_latency_p99_operator", ">=")
+          apigateway_integration_latency_p99       = lookup(attr_val, "apigateway_integration_latency_p99_critical", 1)
+          apigateway_integration_latency     = lookup(attr_val, "apigateway_integration_latency_timeframe", "last_5m")
+          apigateway_integration_latency      = lookup(attr_val, "apigateway_integration_latency_operator", ">=")
+          apigateway_integration_latency      = lookup(attr_val, "apigateway_integration_latency_critical", 1)
+          apigateway_integration_latency_maximum       = lookup(attr_val, "apigateway_integration_latency_maximum_timeframe", "last_5m")
+          apigateway_integration_latency_maximum       = lookup(attr_val, "apigateway_integration_latency_maximum_operator", ">=")
+          apigateway_integration_latency_maximum       = lookup(attr_val, "apigateway_integration_latency_maximum_critical", 1)
+          apigateway_latency_p50       = lookup(attr_val, "apigateway.latency.p50_timeframe", "last_5m")
+          apigateway_latency_p50       = lookup(attr_val, "apigateway.latency.p50_operator", ">=")
+          apigateway_latency_p50       = lookup(attr_val, "apigateway.latency.p50_critical", 1)
+          apigateway_latency_p75       = lookup(attr_val, "apigateway.latency.p75_timeframe", "last_5m")
+          apigateway_latency_p75       = lookup(attr_val, "apigateway.latency.p75_operator", ">=")
+          apigateway_latency_p75       = lookup(attr_val, "apigateway.latency.p75_critical", 1)
+          apigateway_latency_p90      = lookup(attr_val, "apigateway.latency.p90_timeframe", "last_5m")
+          apigateway_latency_p90       = lookup(attr_val, "apigateway.latency.p90_operator", ">=")
+          apigateway_latency_p90       = lookup(attr_val, "apigateway.latency.p90_critical", 1)
+          apigateway_latency_p95     = lookup(attr_val, "apigateway.latency.p95_timeframe", "last_5m")
+          apigateway_latency_p95       = lookup(attr_val, "apigateway.latency.p95_operator", ">=")
+          apigateway_latency_p95       = lookup(attr_val, "apigateway.latency.p95_critical", 1)
+          apigateway_latency_p99     = lookup(attr_val, "apigateway.latency.p99_timeframe", "last_5m")
+          apigateway_latency_p99     = lookup(attr_val, "apigateway.latency.p99_operator", ">=")
+          apigateway_latency_p99       = lookup(attr_val, "apigateway.latency.p99_critical", 1)
+          apigateway_latency     = lookup(attr_val, "apigateway.latency_timeframe", "last_5m")
+          apigateway_latency     = lookup(attr_val, "apigateway.latency_operator", ">=")
+          apigateway_latency     = lookup(attr_val, "apigateway.latency_critical", 1)
+
         }))
       }
     ]
@@ -144,6 +187,22 @@ locals {
           cloudfront_5xxerror_operator          = lookup(attr_val, "cloudfront_5xxerror_operator", ">=")
           cloudfront_5xxerror_critical          = lookup(attr_val, "cloudfront_5xxerror_critical", 1)
           cloudfront_5xxerror_critical_recovery = lookup(attr_val, "cloudfront_5xxerror_critical", 0)
+          cloudfront_bytes_downloaded_timeframe         = lookup(attr_val, "cloudfront_bytes_downloaded_timeframe", "last_5m")
+          cloudfront_bytes_downloaded_operator          = lookup(attr_val, "cloudfront_bytes_downloaded_operator", ">=")
+          cloudfront_bytes_downloaded_critical          = lookup(attr_val, "cloudfront_bytes_downloaded_critical", 1)
+          cloudfront_bytes_uploaded_timeframe         = lookup(attr_val, "cloudfront_bytes_uploaded_timeframe", "last_5m")
+          cloudfront_bytes_uploaded_operator          = lookup(attr_val, "cloudfront_bytes_uploaded_operator", ">=")
+          cloudfront_bytes_uploaded_critical          = lookup(attr_val, "cloudfront_bytes_uploaded_critical", 1)
+          cloudfront_requests_timeframe         = lookup(attr_val, "cloudfront_requests_timeframe", "last_5m")
+          cloudfront_requests_operator          = lookup(attr_val, "cloudfront_requests_operator", ">=")
+          cloudfront_requests_critical          = lookup(attr_val, "cloudfront_requests_critical", 1)
+          cloudfront_total_error_rate_timeframe         = lookup(attr_val, "cloudfront_total_error_rate_timeframe", "last_5m")
+          cloudfront_total_error_rate_operator          = lookup(attr_val, "cloudfront_total_error_rate_operator", ">=")
+          cloudfront_total_error_rate_critical          = lookup(attr_val, "cloudfront_total_error_rate_critical", 1)
+
+
+
+
         }))
       }
     ]
@@ -787,7 +846,66 @@ locals {
     }, item.attributes)))
   }
 
+
+
   #--------------------------------------------------------------------------------
+
+  
+  # transitgateway
+  catalog_transitgateway_files         = [for filename in fileset("${path.module}/monitors/transitgateway/", "*.json") : trimsuffix(filename, ".json")]
+  catalog_transitgateway_monitors_list = var.transitgateway_monitor.enabled == true ? local.catalog_transitgateway_files : []
+  catalog_transitgateway_list = flatten([
+    for item in local.catalog_transitgateway_monitors_list : [
+      for attr_key, attr_val in var.transitgateway_monitor.attributes : {
+        key = "${attr_key}/transitgateway/${item}"
+        value = jsondecode(templatefile("${path.module}/monitors/transitgateway/${item}.json", {
+          name                               = lookup(attr_val, "name", attr_val.api_id)
+          api_id                             = attr_val.api_id
+          notification_targets               = lookup(attr_val, "notification_targets", var.notification_targets)
+          transitgateway_bytes_in     = lookup(attr_val, "transitgateway_bytes_in _timeframe", "last_5m")
+          transitgateway_bytes_in      = lookup(attr_val, "transitgateway_bytes_in_operator", ">=")
+          transitgateway_bytes_in      = lookup(attr_val, "transitgateway_bytes_in _critical", 1)
+          transitgateway_bytes_out     = lookup(attr_val, "transitgateway_bytes_out", "last_5m")
+          transitgateway_bytes_out     = lookup(attr_val, "transitgateway_bytes_out", ">=")
+          transitgateway_bytes_out     = lookup(attr_val, "transitgateway_bytes_out", 1)
+          transitgateway_packet_drop_count_blackhole    = lookup(attr_val, "transitgateway_packet_drop_count_blackhole_timeframe", "last_5m")
+          transitgateway_packet_drop_count_blackhole    = lookup(attr_val, "transitgateway_packet_drop_count_blackhole_operator", ">=")
+          transitgateway_packet_drop_count_blackhole    = lookup(attr_val, "transitgateway_packet_drop_count_blackhole_critical", 1)
+          transitgateway_packet_drop_count_no_route     = lookup(attr_val, "transitgateway_packet_drop_count_no_route_timeframe", "last_5m")
+          transitgateway_packet_drop_count_no_route     = lookup(attr_val, "transitgateway_packet_drop_count_no_route_operator", ">=")
+          transitgateway_packet_drop_count_no_route     = lookup(attr_val, "transitgateway_packet_drop_count_no_route_critical", 1)
+          transitgateway_packets_in      = lookup(attr_val, "transitgateway_packets_in_timeframe", "last_5m")
+          transitgateway_packets_in      = lookup(attr_val, "transitgateway_packets_in_operator", ">=")
+          transitgateway_packets_in      = lookup(attr_val, "transitgateway_packets_in_critical", 1)
+          transitgateway_packets_out     = lookup(attr_val, "transitgateway_packets_out_timeframe", "last_5m")
+          transitgateway_packets_out     = lookup(attr_val, "transitgateway_packets_out_operator", ">=")
+          transitgateway_packets_out     = lookup(attr_val, "transitgateway_packets_out_critical", 1)
+
+        }))
+      }
+    ]
+  ])
+  catalog_apigatewayv2 = { for item in local.catalog_apigatewayv2_list : item.key => item.value }
+
+  custom_apigatewayv2_list = var.apigatewayv2_monitor.enabled == true && var.apigatewayv2_monitor.custom_monitors != null ? flatten([
+    for key, val in var.apigatewayv2_monitor.custom_monitors : [
+      for attr_key, attr_val in var.apigatewayv2_monitor.attributes :
+      {
+        id         = "${attr_key}/${key}"
+        template   = val
+        attributes = attr_val
+      }
+    ]
+  ]) : []
+  custom_apigatewayv2 = {
+    for item in local.custom_apigatewayv2_list : item.id => jsondecode(templatefile(item.template, merge({
+      notification_targets = lookup(item.attributes, "notification_targets", var.notification_targets)
+    }, item.attributes)))
+  }
+
+
+  #--------------------------------------------------------------------------------
+
   monitors_map = merge(
     local.catalog_alb,
     local.custom_alb,
