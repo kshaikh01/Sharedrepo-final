@@ -1,0 +1,18 @@
+{
+	"name": "apigateway.latency.p90: ${name}",
+	"type": "query alert",
+    "query": "sum(${apigateway.latency.p90_timeframe}):sum:aws.apigateway.latency.p90{apiid:${api_id}} ${apigateway.latency.p90_operator} ${apigateway.latency.p90_critical}",
+	"message": "apigateway.latency.p90 Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${apigateway.latency.p90_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

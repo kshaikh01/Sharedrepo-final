@@ -1,0 +1,18 @@
+{
+	"name": "transitgateway.bytes_out: ${name}",
+	"type": "query alert",
+	"query": "sum(${transitgateway.bytes_out_timeframe}):sum:aws.transitgateway.bytes_out{apiid:${api_id}}.as_count() ${transitgateway.bytes_out_operator} ${transitgateway.bytes_out_critical}",
+	"message": "transitgateway.bytes_out Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${transitgateway.bytes_out_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

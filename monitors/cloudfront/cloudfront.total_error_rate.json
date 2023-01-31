@@ -1,0 +1,18 @@
+{
+	"name": "cloudfront.total_error_rate: ${name}",
+	"type": "cloudfront.total_error_rate: ${notification_targets}",
+	"query": "sum(cloudfront.total_error_rate_timeframe):sum:aws.cloudfront.total_error_rate{apiid:${api_id}} ${cloudfront.total_error_rate_operator} ${cloudfront.total_error_rate_critical}",
+	"message": "cloudfront.total_error_rate Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${cloudfront.total_error_rate_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

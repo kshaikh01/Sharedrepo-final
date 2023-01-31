@@ -1,0 +1,18 @@
+{
+	"name":"apigateway.latency_maximum: ${name}",
+	"type": "query alert",
+    "query": "sum(${apigateway_latency_maximum_timeframe):sum:aws.apigateway.latency.maximum {apiid:${api_id}}.as_latency_maximum()  ${apigateway_latency_maximum_operator} ${apigateway_latency_maximum_critical}",
+	"message": "apigateway latency maximum Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${apigateway_latency_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

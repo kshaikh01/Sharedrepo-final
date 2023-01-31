@@ -1,0 +1,18 @@
+{
+	"name": "cloudfront.bytes_downloaded: ${name}",
+	"type": "cloudfront.bytes_downloaded: ${notification_targets}",
+	"query": "sum(cloudfront.bytes_downloaded_timeframe):sum:aws.cloudfront.bytes_downloaded{apiid:${api_id}}.as_count() ${cloudfront.bytes_downloaded_operator} ${cloudfront.bytes_downloaded_critical}",
+	"message": "cloudfront.bytes_downloaded Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${cloudfront.bytes_downloaded_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"name": "apigateway.latency: ${name}",
+	"type": "query alert",
+    "query": "sum(${apigateway.latency_timeframe}):sum:aws.apigateway.latency{apiid:${api_id}} ${apigateway.latency_operator} ${apigateway.latency_critical}",
+	"message": "apigateway.latency Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${apigateway.latency_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

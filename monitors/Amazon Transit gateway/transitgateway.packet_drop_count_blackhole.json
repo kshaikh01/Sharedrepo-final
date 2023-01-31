@@ -1,0 +1,18 @@
+{
+	"name": "transitgateway.packet_drop_count_blackhole: ${name}",
+	"type": "query alert",
+	"query": "sum(${transitgateway.packet_drop_count_blackhole_timeframe}):sum:aws:transitgateway.packet_drop_count_blackhole{apiid:${api_id}}.as_count() ${transitgateway.packet_drop_count_blackhole_operator} ${transitgateway.packet_drop_count_blackhole_critical}",
+	"message": "transitgateway.packet_drop_count_blackhole Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${transitgateway.packet_drop_count_blackhole_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

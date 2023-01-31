@@ -1,0 +1,18 @@
+{
+	"name": "apigateway.count: ${name}",
+	"type": "query alert",
+	"query": "sum(${apigateway_count_timeframe}):sum:aws.apigateway.count{apiid:${api_id}}.as_count() ${apigateway_count_operator} ${apigateway_count_critical}",
+	"message": "apigateway.count Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${apigateway_count_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

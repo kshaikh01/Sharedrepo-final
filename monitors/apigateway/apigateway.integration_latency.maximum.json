@@ -1,0 +1,18 @@
+{
+	"name": "apigateway.integration_latency.maximum: ${name}",
+	"type": "query alert",
+	"query": "sum(${apigateway.integration_latency.maximum_timeframe}):sum:aws.apigateway.integration_latency.maximum{apiid:${api_id}} ${apigateway.integration_latency.maximum_operator} ${apigateway.integration_latency.maximum_critical}",
+	"message": "apigateway.integration_latency.maximum Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${apigateway.integration_latency.maximum_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

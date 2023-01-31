@@ -1,0 +1,18 @@
+{
+	"name": "apigateway.integration_latency.minimum: ${name}",
+	"type": "query alert",
+	"query": "sum(${apigateway.integration_latency.minimum_timeframe}):sum:aws.apigateway.integration_latency.minimum{apiid:${api_id}} ${apigateway.integration_latency.minimum_operator} ${apigateway.integration_latency.minimum_critical}",
+	"message": "apigateway.integration_latency.minimum Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${apigateway.integration_latency.minimum_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"name": "cloudfront.requests: ${name}",
+	"type": "cloudfront.requests: ${notification_targets}",
+	"query": "sum(cloudfront.requests_timeframe):sum:aws.cloudfront.requests{apiid:${api_id}}.as_count() ${cloudfront.requests_operator} ${cloudfront.requests_critical}",
+	"message": "cloudfront.requests Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${cloudfront.requests_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

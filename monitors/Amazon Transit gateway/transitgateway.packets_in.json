@@ -1,0 +1,18 @@
+{
+	"name": "transitgateway.packets_in: ${name}",
+	"type": "query alert",
+	"query": "sum(${transitgateway.packets_in_timeframe}):sum:aws.transitgateway.packets_in{apiid:${api_id}}.as_count() ${transitgateway.packets_in_operator} ${transitgateway.packets_in_critical}",
+	"message": "transitgateway.packets_in Monitor triggered. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${transitgateway.packets_in_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}
