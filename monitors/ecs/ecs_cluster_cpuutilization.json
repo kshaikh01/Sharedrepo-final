@@ -1,0 +1,20 @@
+{
+    "name": "ecs.cluster.cpuutilization: ${service_name}",
+    "type": "metric alert",
+    "query": "avg(${ecs.cluster.cpuutilization_timeframe}):avg:aws.ecs.cluster.cpuutilization{servicename:${service_name}} by {servicename} ${ecs.cluster.cpuutilization_operator} ${ecs.cluster.cpuutilization_threshold}",
+    "message": "ecs.cluster.cpuutilization event monitor triggered for ${service_name}. Notify: ${notification_targets}",
+    "tags": [],
+    "options": {
+        "notify_audit": false,
+        "locked": false,
+        "timeout_h": 0,
+        "require_full_window": false,
+        "notify_no_data": false,
+        "renotify_interval": "0",
+        "evaluation_delay": 900,
+        "thresholds": {
+            "critical": "${ecs.cluster.cpuutilization}"
+        }
+    },
+    "priority": null
+}

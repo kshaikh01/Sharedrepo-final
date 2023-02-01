@@ -89,6 +89,21 @@ comparisons = {
     monitors["#{id}/ecs/service.cpuutilization"]["name"] => "ecs.service.cpuutilization: #{mock_resource_ids["#{id}_ecs"]}",
     monitors["#{id}/ecs/service.memory_utilization"]["name"] => "ecs.service.memory_utilization: #{mock_resource_ids["#{id}_ecs"]}",
     monitors["#{id}/ecs/service.running_instance"]["name"] => "ecs.service.running_instance: #{mock_resource_ids["#{id}_ecs"]}",
+
+    monitors["#{id}/ecs/ecs.cluster.cpureservation.maximum"]["name"] => "ecs.cluster.cpureservation.maximum: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.cpureservation.minimum"]["name"] => "ecs.cluster.cpureservation.minimum: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.cpureservation"]["name"] => "ecs.cluster.cpureservation: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.cpuutilization"]["name"] => "ecs.cluster.cpuutilization: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.cpuutilization.minimum"]["name"] => "ecs.cluster.cpuutilization.minimum: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.cpuutilization.maximum"]["name"] => "ecs.cluster.cpuutilization.maximum: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.memory_reservation.maximum"]["name"] => "ecs.cluster.memory_reservation.maximum: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.memory_reservation.minimum"]["name"] => "ecs.cluster.memory_reservation.minimum: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.memory_reservation"]["name"] => "ecs.cluster.memory_reservation: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.memory_utilization.maximum"]["name"] => "ecs.cluster.memory_utilization.maximum: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.memory_utilization.minimum"]["name"] => "ecs.cluster.memory_utilization.minimum: #{mock_resource_ids["#{id}_ecs"]}",
+    monitors["#{id}/ecs/ecs.cluster.memory_utilization"]["name"] => "ecs.cluster.memory_utilization: #{mock_resource_ids["#{id}_ecs"]}",
+
+
     monitors["#{id}/lambda/throttles"]["name"] => "lambda.throttles: #{mock_resource_ids["#{id}_lambda"]}",
     monitors["#{id}/lambda/lambda_duration"]["name"] => "lambda.duration: #{mock_resource_ids["#{id}_lambda"]}",
     monitors["#{id}/lambda/lambda_duration_maximum"]["name"] => "lambda.duration.maximum: #{mock_resource_ids["#{id}_lambda"]}",

@@ -1,0 +1,24 @@
+{
+	"name": "ecs.cpureservation.maximum: ${service_name}",
+	"type": "query alert",
+    "query": "avg(${ecs.cpureservation.maximum_timeframe}):avg:aws.ecs.cpureservation.maximum{servicename:${service_name}} by {servicename} ${ecs.cpureservation.maximum_operator} ${ecs.cpureservation.maximum_critical}",
+	"message": "ecs.cpureservation.maximum event monitor triggered for ${service_name}. Notify: ${notification_targets}",
+	"tags": [
+
+        "service:${service_name}",
+		"type:automated"
+    ]
+    
+    ,
+	"options": {
+		"thresholds": {
+			"critical": 0
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

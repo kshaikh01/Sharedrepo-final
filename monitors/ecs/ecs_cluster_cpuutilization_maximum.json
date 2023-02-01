@@ -1,0 +1,24 @@
+{
+	"name": "ecs.cluster.cpuutilization.maximum: ${service_name}",
+	"type": "query alert",
+    "query": "avg(${ecs.cluster.cpuutilization.maximum_timeframe}):avg:aws.ecs.cluster.cpuutilization.maximum{servicename:${service_name}} by {servicename} ${ecs.cluster.cpuutilization.maximum_operator} ${ecs.cluster.cpuutilization.maximum_critical}",
+	"message": "ecs.cluster.cpuutilization.maximum event monitor triggered for ${service_name}. Notify: ${notification_targets}",
+	"tags": [
+
+        "service:${service_name}",
+		"type:automated"
+    ]
+    
+    ,
+	"options": {
+		"thresholds": {
+			"critical": 0
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

@@ -417,6 +417,52 @@ locals {
           ecs_running_instance_timeframe            = lookup(attr_val, "ecs_running_instance_timeframe", "last_5m")
           ecs_running_instance_operator             = lookup(attr_val, "ecs_running_instance_operator", "<=")
           ecs_running_instance_critical             = lookup(attr_val, "ecs_running_instance_critical", 0)
+          ecs_cluster_cpureservation_timeframe            = lookup(attr_val, "ecs_cluster_cpureservation_timeframe", "last_5m")
+          ecs_cluster_cpureservation_operator             = lookup(attr_val, "ecs_cluster_cpureservation_operator", "<=")
+          ecs_cluster_cpureservation_critical                   = lookup(attr_val, "ecs_cluster_cpureservation_critical", 0)
+          ecs_cluster_cpureservation_maximum_timeframe            = lookup(attr_val, "ecs_cluster_cpureservation_maximum_timeframe", "last_5m")
+          ecs_cluster_cpureservation_maximum_operator             = lookup(attr_val, "ecs_cluster_cpureservation_maximum_operator", "<=")
+          ecs_cluster_cpureservation_maximum_critical             = lookup(attr_val, "ecs_cluster_cpureservation_maximum_critical", 0)
+          ecs_cluster_cpureservation_minimum_timeframe            = lookup(attr_val, "ecs_cluster_cpureservation_minimum_timeframe", "last_5m")
+          ecs_cluster_cpureservation_minimum_operator             = lookup(attr_val, "ecs_cluster_cpureservation_minimum_operator", "<=")
+          ecs_cluster_cpureservation_minimum_critical             = lookup(attr_val, "ecs_cluster_cpureservation_minimum_critical", 0)
+          ecs_cluster_cpuutilization_timeframe            = lookup(attr_val, "ecs_cluster_cpuutilization_timeframe", "last_5m")
+          ecs_cluster_cpuutilization_operator             = lookup(attr_val, "ecs_cluster_cpuutilization_operator", "<=")
+          ecs_cluster_cpuutilization_critical             = lookup(attr_val, "ecs_cluster_cpuutilization_critical", 0)
+          ecs_cluster_cpuutilization_maximum_timeframe            = lookup(attr_val, "ecs_cluster_cpuutilization_maximum_timeframe", "last_5m")
+          ecs_cluster_cpuutilization_maximum_operator             = lookup(attr_val, "ecs_cluster_cpuutilization_maximum_operator", "<=")
+          ecs_cluster_cpuutilization_maximum_critical             = lookup(attr_val, "ecs_cluster_cpuutilization_maximum_critical", 0)
+          ecs_cluster_cpuutilization_minimum_timeframe            = lookup(attr_val, "ecs_cluster_cpuutilization_minimum_timeframe", "last_5m")
+          ecs_cluster_cpuutilization_minimum_operator             = lookup(attr_val, "ecs_cluster_cpuutilization_minimum_operator", "<=")
+          ecs_cluster_cpuutilization_minimum_critical             = lookup(attr_val, "ecs_cluster_cpuutilization_minimum_critical", 0)
+          ecs_cluster_memory_reservation_timeframe            = lookup(attr_val, "ecs_cluster_memory_reservation_timeframe", "last_5m")
+          ecs_cluster_memory_reservation_operator             = lookup(attr_val, "ecs_cluster_memory_reservation_operator", "<=")
+          ecs_cluster_memory_reservation_critical             = lookup(attr_val, "ecs_cluster_memory_reservation_critical", 0)
+          ecs_cluster_memory_reservation_maximum_timeframe            = lookup(attr_val, "ecs_cluster_memory_reservation_maximum_timeframe", "last_5m")
+          ecs_cluster_memory_reservation_maximum_operator             = lookup(attr_val, "ecs_cluster_memory_reservation_maximum_operator", "<=")
+          ecs_cluster_memory_reservation_maximum_critical             = lookup(attr_val, "ecs_cluster_memory_reservation_maximum_critical", 0)
+          ecs_cluster_memory_reservation_minimum_timeframe            = lookup(attr_val, "ecs_cluster_memory_reservation_minimum_timeframe", "last_5m")
+          ecs_cluster_memory_reservation_minimum_operator             = lookup(attr_val, "ecs_cluster_memory_reservation_minimum_operator", "<=")
+          ecs_cluster_memory_reservation_minimum_critical             = lookup(attr_val, "ecs_cluster_memory_reservation_minimum_critical", 0)
+          ecs_cluster_memory_utilization_timeframe            = lookup(attr_val, "ecs_cluster_memory_utilization_timeframe", "last_5m")
+          ecs_cluster_memory_utilization_operator             = lookup(attr_val, "ecs_cluster_memory_utilization_operator", "<=")
+          ecs_cluster_memory_utilization_critical             = lookup(attr_val, "ecs_ecs_cluster_memory_utilization_critical", 0)
+          ecs_cluster_memory_utilization_maximum_timeframe            = lookup(attr_val, "ecs_cluster_memory_utilization_maximum_timeframe", "last_5m")
+          ecs_cluster_memory_utilization_maximum_operator             = lookup(attr_val, "ecs_cluster_memory_utilization_maximum_operator", "<=")
+          ecs_cluster_memory_utilization_maximum_critical             = lookup(attr_val, "ecs_cluster_memory_utilization_maximum_critical", 0)
+          ecs_cluster_memory_utilization_minimum_timeframe            = lookup(attr_val, "ecs_cluster_memory_utilization_minimum_timeframe", "last_5m")
+          ecs_cluster_memory_utilization_minimum_operator             = lookup(attr_val, "ecs_cluster_memory_utilization_minimum_operator", "<=")
+          ecs_cluster_memory_utilization_minimum_critical             = lookup(attr_val, "ecs_cluster_memory_utilization_minimum_critical", 0)
+
+
+
+
+
+
+
+
+
+
         }))
       }
     ]
@@ -885,11 +931,11 @@ locals {
       }
     ]
   ])
-  catalog_apigatewayv2 = { for item in local.catalog_apigatewayv2_list : item.key => item.value }
+  catalog_transitgateway = { for item in local.catalog_apigatewayv2_list : item.key => item.value }
 
-  custom_apigatewayv2_list = var.apigatewayv2_monitor.enabled == true && var.apigatewayv2_monitor.custom_monitors != null ? flatten([
-    for key, val in var.apigatewayv2_monitor.custom_monitors : [
-      for attr_key, attr_val in var.apigatewayv2_monitor.attributes :
+  custom_transitgateway_list = var.transitgateway_monitor.enabled == true && var.transitgateway_monitor.custom_monitors != null ? flatten([
+    for key, val in var.transitgateway_monitor.custom_monitors : [
+      for attr_key, attr_val in var.transitgateway_monitor.attributes :
       {
         id         = "${attr_key}/${key}"
         template   = val
@@ -897,8 +943,8 @@ locals {
       }
     ]
   ]) : []
-  custom_apigatewayv2 = {
-    for item in local.custom_apigatewayv2_list : item.id => jsondecode(templatefile(item.template, merge({
+  custom_transitgateway = {
+    for item in local.custom_transitgateway_list : item.id => jsondecode(templatefile(item.template, merge({
       notification_targets = lookup(item.attributes, "notification_targets", var.notification_targets)
     }, item.attributes)))
   }

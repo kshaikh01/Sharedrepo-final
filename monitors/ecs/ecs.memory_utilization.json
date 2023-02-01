@@ -1,0 +1,24 @@
+{
+	"name": "ecs.memory_utilization: ${service_name}",
+	"type": "query alert",
+    "query": "avg(${ecs.memory_utilization_timeframe}):avg:aws.ecs.memory_utilization{servicename:${service_name}} by {servicename} ${ecs.memory_utilization_operator} ${ecs.memory_utilization_critical}",
+	"message": "ecs.memory_utilization event monitor triggered for ${service_name}. Notify: ${notification_targets}",
+	"tags": [
+
+        "service:${service_name}",
+		"type:automated"
+    ]
+    
+    ,
+	"options": {
+		"thresholds": {
+			"critical": 0
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}
