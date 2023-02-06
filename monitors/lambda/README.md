@@ -176,3 +176,146 @@
 |  lambda_enhanced_timeouts_timeframe | Timeframe for the lambda_enhanced_timeouts monitor. | `string`| `"last_15m"` | no |
 |  lambda_enhanced_timeouts_operator | Operator for the  lambda_enhanced_timeouts monitor [>, <, >=, <=,] | `string`| `">"` | no |
 |  lambda_enhanced_timeouts_critical | Critical threshold for the  lambda_enhanced_timeouts monitor. | `100` | `number`| no |
+
+### lambda.unreserved_concurrent_executions monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.unreserved_concurrent_executions_timeframe | Timeframe for the lambda.unreserved_concurrent_executions monitor. | `string`| `"last_15m"` | no |
+|  lambda.unreserved_concurrent_executions_operator | Operator for the  lambda.unreserved_concurrent_executions monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.unreserved_concurrent_executions_critical | Critical threshold for the  lambda.unreserved_concurrent_executions monitor. | `100` | `number`| no |
+
+### lambda.concurrent_executions_global.maximum monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.concurrent_executions_global.maximum_timeframe | Timeframe for the lambda.concurrent_executions_global.maximum monitor. | `string`| `"last_15m"` | no |
+|  lambda.concurrent_executions_global.maximum_operator | Operator for the  lambda.concurrent_executions_global.maximum monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.concurrent_executions_global.maximum_critical | Critical threshold for the  lambda.concurrent_executions_global.maximum_executions monitor. | `100` | `number`| no |
+
+
+### lambda.concurrent_executions_global.sum monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.concurrent_executions_global.sum_timeframe | Timeframe for the lambda.concurrent_executions_global.sum monitor. | `string`| `"last_15m"` | no |
+|  lambda.concurrent_executions_global.sumo_operator | Operator for the  lambda.concurrent_executions_global.sum monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.concurrent_executions_global.sum_critical | Critical threshold for the  lambda.concurrent_executions_global.sum monitor. | `100` | `number`| no |
+
+### lambda.concurrent_executions_global monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.concurrent_executions_global_timeframe | Timeframe for the lambda.concurrent_executions_global monitor. | `string`| `"last_15m"` | no |
+|  lambda.concurrent_executions_global_operator | Operator for the  lambda.concurrent_executions_global monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.concurrent_executions_global_critical | Critical threshold for the  lambda.concurrent_executions_global monitor. | `100` | `number`| no |
+
+
+## lambda.concurrent_executions.maximum monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.concurrent_executions.maximum_timeframe | Timeframe for the lambda.concurrent_executions.maximum monitor. | `string`| `"last_15m"` | no |
+|  lambda.concurrent_executions.maximum_operator | Operator for the  lambda.concurrent_executions.maximum monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.concurrent_executions.maximum_critical | Critical threshold for the  lambda.concurrent_executions.maximum monitor. | `100` | `number`| no |
+
+## lambda.concurrent_executions.minimum monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.concurrent_executions.minimum_timeframe | Timeframe for the lambda.concurrent_executions.minimum monitor. | `string`| `"last_15m"` | no |
+|  lambda.concurrent_executions.minimum_operator | Operator for the  lambda.concurrent_executions.minimum monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.concurrent_executions.minimum_critical | Critical threshold for the  lambda.concurrent_executions.minimum monitor. | `100` | `number`| no |
+
+
+## lambda.concurrent_executions.sum monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.concurrent_executions.sum_timeframe | Timeframe for the lambda.concurrent_executions.sum monitor. | `string`| `"last_15m"` | no |
+|  lambda.concurrent_executions.sum_operator | Operator for the  lambda.concurrent_executions.sum monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.concurrent_executions.sum_critical | Critical threshold for the  lambda.concurrent_executions.sum monitor. | `100` | `number`| no |
+
+
+## lambda.duration.p95 monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.duration.p95_timeframe | Timeframe for the lambda.duration.p95 monitor. | `string`| `"last_15m"` | no |
+|  lambda.duration.p95_operator | Operator for the  lambda.duration.p95 monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.duration.p95_critical | Critical threshold for the  lambda.duration.p95 monitor. | `100` | `number`| no |
+
+
+## lambda.duration.p99 monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.duration.p99_timeframe | Timeframe for the lambda.duration.p99 monitor. | `string`| `"last_15m"` | no |
+|  lambda.duration.p99_operator | Operator for the  lambda.duration.p99 monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.duration.p99_critical | Critical threshold for the  lambda.duration.p99 monitor. | `100` | `number`| no |
+
+## lambda.enhanced.billed_duration monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.enhanced.billed_duration_timeframe | Timeframe for the lambda.enhanced.billed_duration monitor. | `string`| `"last_15m"` | no |
+|  lambda.enhanced.billed_duration_operator | Operator for the  lambda.enhanced.billed_duration monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.enhanced.billed_duration_critical | Critical threshold for the lambda.enhanced.billed_duration monitor. | `100` | `number`| no |
+
+
+## lambda.provisioned_concurrency_utilization.maximum: monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.provisioned_concurrency_utilization.maximum_timeframe | Timeframe for the lambda.provisioned_concurrency_utilization.maximum monitor. | `string`| `"last_15m"` | no |
+|  lambda.provisioned_concurrency_utilization.maximum:_operator | Operator for the  lambda.provisioned_concurrency_utilization.maximum monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.provisioned_concurrency_utilization.maximum_critical | Critical threshold for the lambda.provisioned_concurrency_utilization.maximum monitor. | `100` | `number`| no |
+
+## lambda.provisioned_concurrency_utilization.minimum monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.provisioned_concurrency_utilization.minimum_timeframe | Timeframe for the lambda.provisioned_concurrency_utilization.minimum monitor. | `string`| `"last_15m"` | no |
+|  lambda.provisioned_concurrency_utilization.minimum_operator | Operator for the  lambda.provisioned_concurrency_utilization.minimum monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.provisioned_concurrency_utilization.minimum_critical | Critical threshold for the lambda.provisioned_concurrency_utilization.minimum monitor. | `100` | `number`| no |
+
+
+## lambda.unreserved_concurrent_executions.minimum monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.unreserved_concurrent_executions.minimum_timeframe | Timeframe for the lambda.unreserved_concurrent_executions.minimum monitor. | `string`| `"last_15m"` | no |
+|  lambda.unreserved_concurrent_executions.minimum_operator | Operator for the  lambda.unreserved_concurrent_executions.minimum monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.unreserved_concurrent_executions.minimum_critical | Critical threshold for the lambda.unreserved_concurrent_executions.minimum monitor. | `100` | `number`| no |
+
+## lambda.concurrent_executions_global.minimum monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.concurrent_executions_global.minimum_timeframe | Timeframe for the lambda.concurrent_executions_global.minimum monitor. | `string`| `"last_15m"` | no |
+|  lambda.concurrent_executions_global.minimum_operator | Operator for the  lambda.concurrent_executions_global.minimum monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.concurrent_executions_global.minimum_critical | Critical threshold for the lambda.concurrent_executions_global.minimum monitor. | `100` | `number`| no |
+
+## lambda.duration.p99.9 monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.duration.p99.9_timeframe | Timeframe for the lambda.duration.p99.9 monitor. | `string`| `"last_15m"` | no |
+|  lambda.duration.p99.9_operator | Operator for the lambda.duration.p99.9 monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.duration.p99.9_critical | Critical threshold for the lambda.duration.p99.9 monitor. | `100` | `number`| no |
+
+## lambda.throttles monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.throttles_timeframe | Timeframe for the lambda.throttles monitor. | `string`| `"last_15m"` | no |
+|  lambda.throttles_operator | Operator for the lambda.throttles monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.throttles_critical | Critical threshold for the lambda.throttles monitor. | `100` | `number`| no |
+
+## lambda.timeout monitor
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+|  lambda.timeout_timeframe | Timeframe for the lambda.timeout monitor. | `string`| `"last_15m"` | no |
+|  lambda.timeout_operator | Operator for the lambda.timeout monitor [>, <, >=, <=,] | `string`| `">"` | no |
+|  lambda.timeout_critical | Critical threshold for the lambda.timeout monitor. | `100` | `number`| no |

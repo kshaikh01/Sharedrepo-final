@@ -453,6 +453,82 @@ locals {
           ecs_cluster_memory_utilization_minimum_timeframe            = lookup(attr_val, "ecs_cluster_memory_utilization_minimum_timeframe", "last_5m")
           ecs_cluster_memory_utilization_minimum_operator             = lookup(attr_val, "ecs_cluster_memory_utilization_minimum_operator", "<=")
           ecs_cluster_memory_utilization_minimum_critical             = lookup(attr_val, "ecs_cluster_memory_utilization_minimum_critical", 0)
+          ecs_cpureservation_maximum_timeframe            = lookup(attr_val, "ecs_cluster_memory_utilization_minimum_timeframe", "last_5m")
+          ecs_cpureservation_maximum_operator             = lookup(attr_val, "ecs_cluster_memory_utilization_minimum_operator", "<=")
+          ecs_cpureservation_maximum_critical             = lookup(attr_val, "ecs_cluster_memory_utilization_minimum_critical", 0)
+          ecs_cpureservation_timeframe            = lookup(attr_val, " ecs_cpureservation_timeframe", "last_5m")
+          ecs_cpureservation_operator             = lookup(attr_val, " ecs_cpureservation_operator", "<=")
+          ecs_cpureservation_critical             = lookup(attr_val, " ecs_cpureservation_critical", 0)
+          ecs_cpureservation_minimum_timeframe            = lookup(attr_val, " ecs_cpureservation_minimum_timeframe", "last_5m")
+          ecs_cpureservation_minimum_operator             = lookup(attr_val, " ecs_cpureservation_minimum_operator", "<=")
+          ecs_cpureservation_minimum_critical             = lookup(attr_val, " ecs_cpureservation_minimum_critical", 0)
+          ecs_cpuutilization_timeframe            = lookup(attr_val, " ecs_cpuutilization_timeframe", "last_5m")
+          ecs_cpuutilization_operator             = lookup(attr_val, " ecs_cpuutilization_operator", "<=")
+          ecs_cpuutilization_critical             = lookup(attr_val, " ecs_cpuutilization_critical", 0)
+          ecs_cpuutilization_maximum_timeframe            = lookup(attr_val, " ecs_cpuutilization_maximum_timeframe", "last_5m")
+          ecs_cpuutilization_maximum_operator             = lookup(attr_val, " ecs_cpuutilization_maximum_operator", "<=")
+          ecs_cpuutilization_maximum_critical             = lookup(attr_val, " ecs_cpuutilization_maximum_critical", 0)
+          ecs_cpuutilization_minimum_timeframe            = lookup(attr_val, " ecs_cpuutilization_minimum_timeframe", "last_5m")
+          ecs_cpuutilization_minimum_operator             = lookup(attr_val, " ecs_cpuutilization_minimum_operator", "<=")
+          ecs_cpuutilization_minimum_critical             = lookup(attr_val, " ecs_cpuutilization_minimum_critical", 0)
+          ecs_memory_reservation_timeframe            = lookup(attr_val, " ecs_memory_reservation_timeframe", "last_5m")
+          ecs_memory_reservation_operator             = lookup(attr_val, " ecs_memory_reservation_operator", "<=")
+          ecs_memory_reservation_critical             = lookup(attr_val, " ecs_memory_reservation_critical", 0)
+          ecs_memory_reservation_maximum_timeframe            = lookup(attr_val, " ecs_memory_reservation_maximum_timeframe", "last_5m")
+          ecs_memory_reservation_maximum_operator             = lookup(attr_val, " ecs_memory_reservation_maximum_operator", "<=")
+          ecs_memory_reservation_maximum_critical             = lookup(attr_val, " ecs_memory_reservation_maximum_critical", 0)
+          ecs_memory_reservation_minimum_timeframe            = lookup(attr_val, " ecs_memory_reservation_minimum_timeframe", "last_5m")
+          ecs_memory_reservation_minimum_operator             = lookup(attr_val, " ecs_memory_reservation_minimum_operator", "<=")
+          ecs_memory_reservation_minimum_critical             = lookup(attr_val, "  ecs_memory_reservation_minimum_critical", 0)
+          ecs_memory_utilization_timeframe            = lookup(attr_val, " ecs_memory_utilization_timeframe", "last_5m")
+          ecs_memory_utilization_operator             = lookup(attr_val, " ecs_memory_utilization_operator", "<=")
+          ecs_memory_utilization_critical             = lookup(attr_val, "  ecs_memory_utilization_critical", 0)
+          ecs_memory_utilization_maximum_timeframe            = lookup(attr_val, "  ecs_memory_utilization_maximum_timeframe", "last_5m")
+          ecs_memory_utilization_maximum_operator             = lookup(attr_val, "  ecs_memory_utilization_maximum_operator", "<=")
+          ecs_memory_utilization_maximum_critical             = lookup(attr_val, "   ecs_memory_utilization_maximum_critical", 0)
+
+          ecs_memory_utilization_minimum_timeframe            = lookup(attr_val, "  ecs_memory_utilization_minimum_timeframe", "last_5m")
+          ecs_memory_utilization_minimum_operator             = lookup(attr_val, "  ecs_memory_utilization_minimum_operator", "<=")
+          ecs_memory_utilization_minimum_critical             = lookup(attr_val, "  ecs_memory_utilization_minimum_critical", 0)
+
+          ecs_pending_tasks_count_timeframe            = lookup(attr_val, "  ecs_pending_tasks_count_timeframe", "last_5m")
+          ecs_pending_tasks_count_operator             = lookup(attr_val, "  ecs_pending_tasks_count_operator", "<=")
+          ecs_pending_tasks_count_critical             = lookup(attr_val, "  ecs_pending_tasks_count_critical", 0)
+
+          ecs_registered_cpu_timeframe            = lookup(attr_val, "  ecs_registered_cpu_timeframe", "last_5m")
+          ecs_registered_cpu_operator             = lookup(attr_val, "  ecs_registered_cpu_operator", "<=")
+          ecs_registered_cpu_critical             = lookup(attr_val, "  ecs_registered_cpu_count_critical", 0)
+
+          ecs_registered_memory_timeframe            = lookup(attr_val, "  ecs_registered_memory_timeframe", "last_5m")
+          ecs_registered_memory_operator             = lookup(attr_val, "  ecs_registered_memory_operator", "<=")
+          ecs_registered_memory_critical             = lookup(attr_val, "  ecs_registered_memory_critical", 0)
+
+          ecs_remaining_cpu_timeframe            = lookup(attr_val, "  ecs_remaining_cpu_timeframe", "last_5m")
+          ecs_remaining_cpu_operator             = lookup(attr_val, "  ecs_remaining_cpu_operator", "<=")
+          ecs_remaining_cpu_critical             = lookup(attr_val, "  ecs_remaining_cpu_critical", 0)
+
+
+          ecs_running_tasks_count_timeframe            = lookup(attr_val, "  ecs_running_tasks_count_timeframe", "last_5m")
+          ecs_running_tasks_count_operator             = lookup(attr_val, "  ecs_running_tasks_count_operator", "<=")
+          ecs_running_tasks_count_critical             = lookup(attr_val, "  ecs_running_tasks_count_critical", 0)
+
+          ecs_service_cpuutilization_timeframe            = lookup(attr_val, "  ecs_service_cpuutilization_timeframe", "last_5m")
+          ecs_service_cpuutilization_operator             = lookup(attr_val, "  ecs_service_cpuutilization_operator", "<=")
+          ecs_service_cpuutilization_critical             = lookup(attr_val, "  ecs_service_cpuutilization_critical", 0)
+
+          ecs_service_cpuutilization_maximum_timeframe            = lookup(attr_val, "   ecs_service_cpuutilization_maximum_timeframe", "last_5m")
+          ecs_service_cpuutilization_maximum_operator             = lookup(attr_val, "   ecs_service_cpuutilization_maximum_operator", "<=")
+          ecs_service_cpuutilization_maximum_critical             = lookup(attr_val, "   ecs_service_cpuutilization_maximum_critical", 0)
+
+
+
+
+
+
+
+
+          
+
 
 
 
@@ -565,7 +641,45 @@ locals {
           lambda_enhanced_timeouts_critical                              = lookup(attr_val, "lambda_enhanced_timeouts_critical", 100)
           lambda_enhanced_timeouts_timeframe                             = lookup(attr_val, "lambda_enhanced_timeouts_timeframe", "last_15m")
           lambda_enhanced_timeouts_operator                              = lookup(attr_val, "lambda_enhanced_timeouts_operator", ">")
-
+          lambda_unreserved_concurrent_executions_critical               = lookup(attr_val, "lambda_unreserved_concurrent_executions_critical", 100)
+          lambda_unreserved_concurrent_executions_timeframe              = lookup(attr_val, "lambda_unreserved_concurrent_executions_timeframe", "last_15m")
+          lambda_unreserved_concurrent_executions_operator               = lookup(attr_val, "lambda_unreserved_concurrent_executions_operator", ">")
+          lambda_concurrent_executions_global_minimum_critical           = lookup(attr_val, "lambda_concurrent_executions_global_minimum_critical", 100)
+          lambda_concurrent_executions_global_minimum_timeframe          = lookup(attr_val, "lambda_concurrent_executions_global_minimumtimeframe", "last_15m")
+          lambda_concurrent_executions_global_minimum_operator           = lookup(attr_val, "lambda_concurrent_executions_global_minimumj_operator", ">")
+          lambda_concurrent_executions_global_maximum_critical           = lookup(attr_val, "lambda_concurrent_executions_global_maximum_critical", 100)
+          lambda_concurrent_executions_global_maximum_timeframe          = lookup(attr_val, "lambda_concurrent_executions_global_maximum_timeframe", "last_15m")
+          lambda_concurrent_executions_global_maximum_operator           = lookup(attr_val, "lambda_concurrent_executions_global_maximum_operator", ">")
+          lambda_concurrent_executions_sum_critical                      = lookup(attr_val, "lambda_concurrent_executions_sum_critical", 100)
+          lambda_concurrent_executions_sum_timeframe                     = lookup(attr_val, "lambda_concurrent_executions_sum_timeframe", "last_15m")
+          lambda_concurrent_executions_sum_operator                      = lookup(attr_val, "lambda_concurrent_executions_sum_operator", ">")
+          lambda_duration_p95_critical                                   = lookup(attr_val, "lambda_duration_p95_critical", 100)
+          lambda_duration_p95_timeframe                                  = lookup(attr_val, "lambda_duration_p95_timeframe", "last_15m")
+          lambda_duration_p95_operator                                   = lookup(attr_val, "lambda_duration_p95_operator", ">")
+          lambda_duration_p99_critical                                   = lookup(attr_val, "lambda_duration_p99_critical", 100)
+          lambda_duration_p99_timeframe                                  = lookup(attr_val, "lambda_duration_p99_timeframe", "last_15m")
+          lambda_duration_p99_operator                                   = lookup(attr_val, "lambda_duration_p99_operator", ">")
+          lambda_enhanced_billed_duration_critical                       = lookup(attr_val, "lambda_enhanced_billed_duration_critical", 100)
+          lambda_enhanced_billed_duration_timeframe                      = lookup(attr_val, "lambda_enhanced_billed_duration", "last_15m")
+          lambda_enhanced_billed_duration_operator                       = lookup(attr_val, "lambda_duration_p95_operator", ">")
+          lambda_provisioned_concurrency_utilization_maximum_critical    = lookup(attr_val, "lambda_provisioned_concurrency_utilization_maximum_critical", 100)
+          lambda_provisioned_concurrency_utilization_maximum_timeframe   = lookup(attr_val, "lambda_provisioned_concurrency_utilization_maximum_duration", "last_15m")
+          lambda_provisioned_concurrency_utilization_maximum_operator    = lookup(attr_val, "lambda_provisioned_concurrency_utilization_maximum_operator", ">")
+          lambda_provisioned_concurrency_utilization_minimum_critical    = lookup(attr_val, "lambda_provisioned_concurrency_utilization_minimum_critical", 100)
+          lambda_provisioned_concurrency_utilization_minimum_timeframe   = lookup(attr_val, "lambda_provisioned_concurrency_utilization_minimum_duration", "last_15m")
+          lambda_provisioned_concurrency_utilization_minimum_operator    = lookup(attr_val, "lambda_provisioned_concurrency_utilization_minimum_operator", ">") 
+          lambda_throttles_critical                                      = lookup(attr_val, "lambda_throttles_critical", 100)
+          lambda_throttles_timeframe                                     = lookup(attr_val, "lambda_throttles_duration", "last_15m")
+          lambda_throttles_operator                                      = lookup(attr_val, "lambda_throttles_operator", ">") 
+          lambda_timeout_critical                                        = lookup(attr_val, "lambda_timeout_critical", 100)
+          lambda_timeout_timeframe                                       = lookup(attr_val, "lambda_timeout_duration", "last_15m")
+          lambda_timeout_operator                                        = lookup(attr_val, "lambda_timeout_operator", ">") 
+          lambda_unreserved_concurrent_executions_critical               = lookup(attr_val, "lambda_unreserved_concurrent_executions_critical", 100)
+          lambda_unreserved_concurrent_executions_timeframe              = lookup(attr_val, "lambda_unreserved_concurrent_executions_duration", "last_15m")
+          lambda_unreserved_concurrent_executions_operator               = lookup(attr_val, "lambda_unreserved_concurrent_executions_operator", ">") 
+          lambda_unreserved_concurrent_executions_maximum_critical       = lookup(attr_val, "lambda_unreserved_concurrent_executions_maximum_critical", 100)
+          lambda_unreserved_concurrent_executions_maximum_timeframe      = lookup(attr_val, "lambda_unreserved_concurrent_executions_maximum_duration", "last_15m")
+          lambda_unreserved_concurrent_executions_maximum_operator       = lookup(attr_val, "lambda_unreserved_concurrent_executions_maximum_operator", ">") 
         }))
       }
     ]

@@ -1,0 +1,24 @@
+{
+	"name": "ecs.pending_tasks_count: ${service_name}",
+	"type": "query alert",
+    "query": "avg(${ecs.pending_tasks_count_timeframe}):avg:aws.ecs.pending_tasks_count{servicename:${service_name}} by {servicename} ${ecs.pending_tasks_count_operator} ${ecs.pending_tasks_count_critical}",
+	"message": "ecs.pending_tasks_count event monitor triggered for ${service_name}. Notify: ${notification_targets}",
+	"tags": [
+
+        "service:${service_name}",
+		"type:automated"
+    ]
+    
+    ,
+	"options": {
+		"thresholds": {
+			"critical": 0
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

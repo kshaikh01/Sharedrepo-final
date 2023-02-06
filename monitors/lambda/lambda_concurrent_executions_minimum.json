@@ -1,0 +1,18 @@
+{
+	"name": "lambda.concurrent_executions.minimum: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda.concurrent_executions.minimum_timeframe}):sum:aws.lambda.concurrent_executions.minimum{functionname:${function_name}} ${lambda.concurrent_executions.minimum_operator} ${lambda.concurrent_executions.minimum_critical}",
+	"message": "lambda.concurrent_executions.minimum monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda.concurrent_executions.minimum_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

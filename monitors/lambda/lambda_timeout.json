@@ -1,0 +1,18 @@
+{
+	"name": "lambda.timeout: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda.timeout_timeframe}):sum:aws.lambda.timeout{functionname:${function_name}} ${lambda.timeout_operator} ${lambda.timeout_critical}",
+	"message": "lambda.timeout monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda.timeout_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

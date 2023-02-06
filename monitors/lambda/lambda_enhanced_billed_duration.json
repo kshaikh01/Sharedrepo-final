@@ -1,0 +1,18 @@
+{
+	"name": "lambda.enhanced.billed_duration: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda.enhanced.billed_duration_timeframe}):sum:aws.lambda.enhanced.billed_duration{functionname:${function_name}.as_count() ${lambda.enhanced.billed_duration_operator} ${lambda.enhanced.billed_duration_critical}",
+	"message": "lambda.enhanced.billed_duration monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda.enhanced.billed_duration_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}

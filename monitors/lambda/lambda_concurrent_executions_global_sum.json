@@ -1,0 +1,18 @@
+{
+	"name": "lambda.concurrent_executions_global.sum: ${function_name}",
+	"type": "query alert",
+	"query": "sum(${lambda.concurrent_executions_global.sum_timeframe}):sum:aws.lambda.concurrent_executions_global.sum{functionname:${function_name}} ${lambda.concurrent_executions_global.sum_operator} ${lambda.concurrent_executions_global.sum_critical}",
+	"message": "lambda.concurrent_executions_global.sum monitor triggered for ${function_name}. Notify: ${notification_targets}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": "${lambda.concurrent_executions_global.sum_critical}"
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": false,
+		"evaluation_delay": 900
+	}
+}
