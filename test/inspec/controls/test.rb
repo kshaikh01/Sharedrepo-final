@@ -119,9 +119,6 @@ comparisons = {
     monitors["#{id}/ecs/ecs.running_tasks_count"]["name"] => "ecs.running_tasks_count: #{mock_resource_ids["#{id}_ecs"]}",
     monitors["#{id}/ecs/ecs.service.cpuutilization"]["name"] => "ecs.service.cpuutilization: #{mock_resource_ids["#{id}_ecs"]}",
     monitors["#{id}/ecs/ecs.service.cpuutilization.maximum"]["name"] => "ecs.service.cpuutilization.maximum: #{mock_resource_ids["#{id}_ecs"]}",
-
-
-
     monitors["#{id}/lambda/throttles"]["name"] => "lambda.throttles: #{mock_resource_ids["#{id}_lambda"]}",
     monitors["#{id}/lambda/lambda_duration"]["name"] => "lambda.duration: #{mock_resource_ids["#{id}_lambda"]}",
     monitors["#{id}/lambda/lambda_duration_maximum"]["name"] => "lambda.duration.maximum: #{mock_resource_ids["#{id}_lambda"]}",
@@ -165,7 +162,6 @@ comparisons = {
     monitors["#{id}/lambda/lambda.timeout"]["name"] => "lambda.timeout: #{mock_resource_ids["#{id}_lambda"]}",
     monitors["#{id}/lambda/lambda.unreserved_concurrent_executions"]["name"] => "lambda.unreserved_concurrent_executions: #{mock_resource_ids["#{id}_lambda"]}",
     monitors["#{id}/lambda/lambda.unreserved_concurrent_executions.maximum"]["name"] => "lambda.unreserved_concurrent_executions.maximum: #{mock_resource_ids["#{id}_lambda"]}",
-
     monitors["#{id}/rds/cpuutilization"]["name"] => "rds.cpuutilization: #{mock_resource_ids["#{id}_rds"]}",
     monitors["#{id}/rds/rds_burst_balance"]["name"] => "rds_burst_balance: #{mock_resource_ids["#{id}_rds"]}",
     monitors["#{id}/rds/rds_transaction_logs_disk_usage"]["name"] => "rds_transaction_logs_disk_usage: #{mock_resource_ids["#{id}_rds"]}",

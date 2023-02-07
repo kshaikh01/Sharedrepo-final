@@ -486,56 +486,30 @@ locals {
           ecs_memory_utilization_maximum_timeframe            = lookup(attr_val, "  ecs_memory_utilization_maximum_timeframe", "last_5m")
           ecs_memory_utilization_maximum_operator             = lookup(attr_val, "  ecs_memory_utilization_maximum_operator", "<=")
           ecs_memory_utilization_maximum_critical             = lookup(attr_val, "   ecs_memory_utilization_maximum_critical", 0)
-
           ecs_memory_utilization_minimum_timeframe            = lookup(attr_val, "  ecs_memory_utilization_minimum_timeframe", "last_5m")
           ecs_memory_utilization_minimum_operator             = lookup(attr_val, "  ecs_memory_utilization_minimum_operator", "<=")
           ecs_memory_utilization_minimum_critical             = lookup(attr_val, "  ecs_memory_utilization_minimum_critical", 0)
-
           ecs_pending_tasks_count_timeframe            = lookup(attr_val, "  ecs_pending_tasks_count_timeframe", "last_5m")
           ecs_pending_tasks_count_operator             = lookup(attr_val, "  ecs_pending_tasks_count_operator", "<=")
           ecs_pending_tasks_count_critical             = lookup(attr_val, "  ecs_pending_tasks_count_critical", 0)
-
           ecs_registered_cpu_timeframe            = lookup(attr_val, "  ecs_registered_cpu_timeframe", "last_5m")
           ecs_registered_cpu_operator             = lookup(attr_val, "  ecs_registered_cpu_operator", "<=")
           ecs_registered_cpu_critical             = lookup(attr_val, "  ecs_registered_cpu_count_critical", 0)
-
           ecs_registered_memory_timeframe            = lookup(attr_val, "  ecs_registered_memory_timeframe", "last_5m")
           ecs_registered_memory_operator             = lookup(attr_val, "  ecs_registered_memory_operator", "<=")
           ecs_registered_memory_critical             = lookup(attr_val, "  ecs_registered_memory_critical", 0)
-
           ecs_remaining_cpu_timeframe            = lookup(attr_val, "  ecs_remaining_cpu_timeframe", "last_5m")
           ecs_remaining_cpu_operator             = lookup(attr_val, "  ecs_remaining_cpu_operator", "<=")
           ecs_remaining_cpu_critical             = lookup(attr_val, "  ecs_remaining_cpu_critical", 0)
-
-
           ecs_running_tasks_count_timeframe            = lookup(attr_val, "  ecs_running_tasks_count_timeframe", "last_5m")
           ecs_running_tasks_count_operator             = lookup(attr_val, "  ecs_running_tasks_count_operator", "<=")
           ecs_running_tasks_count_critical             = lookup(attr_val, "  ecs_running_tasks_count_critical", 0)
-
           ecs_service_cpuutilization_timeframe            = lookup(attr_val, "  ecs_service_cpuutilization_timeframe", "last_5m")
           ecs_service_cpuutilization_operator             = lookup(attr_val, "  ecs_service_cpuutilization_operator", "<=")
           ecs_service_cpuutilization_critical             = lookup(attr_val, "  ecs_service_cpuutilization_critical", 0)
-
           ecs_service_cpuutilization_maximum_timeframe            = lookup(attr_val, "   ecs_service_cpuutilization_maximum_timeframe", "last_5m")
           ecs_service_cpuutilization_maximum_operator             = lookup(attr_val, "   ecs_service_cpuutilization_maximum_operator", "<=")
           ecs_service_cpuutilization_maximum_critical             = lookup(attr_val, "   ecs_service_cpuutilization_maximum_critical", 0)
-
-
-
-
-
-
-
-
-          
-
-
-
-
-
-
-
-
 
 
 
